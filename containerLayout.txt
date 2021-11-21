@@ -1,0 +1,22 @@
+return (
+    <div className={utilStyles.containerOuter}>
+    <Head>
+        <title>Login</title>
+        <meta name='keywords' content='login'></meta>
+        <meta name='description' content='login form'></meta>
+    </Head>
+    
+    <div className={utilStyles.containerWrap}>
+        <div className={`${utilStyles.containerInner} ${utilStyles.containerReverse}`}>
+            <span>
+                
+            </span>
+            <span>
+                <div className={utilStyles.imgWrap}>
+                <Image src={imgBanner} width={600} height={500} alt='woman writing' layout="responsive" priority />
+                </div>
+            </span>
+        </div>
+    </div>
+    </div>
+);

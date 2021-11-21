@@ -1,7 +1,7 @@
 @import "../styles/variable.scss";
 
 .footerWrap {
-    margin: 10rem auto 2rem auto;
+    margin: 1rem auto 2rem auto;
     display: block;
     width: 100%;
     text-align: center;
@@ -10,5 +10,11 @@
         font-size: 14px;
         line-height: 18px;
         font-family: $font-family;
+    }
+}
+
+@media (max-width: 768px) {
+    .footerWrap {
+        margin: 5rem auto 1rem auto;
     }
 }

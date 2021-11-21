@@ -1,4 +1,4 @@
-import layoutStyles from '../styles/Layout.module.css'
+import layoutStyles from '../styles/Layout.module.scss'
 import TopNav from './TopNav';
 import Footer from './Footer';
 

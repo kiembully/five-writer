@@ -1,0 +1,94 @@
+@import "../styles/variable.scss";
+
+.loginFormOuter {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 400px;
+    display: block;
+    min-height: 400px;
+    h1 {
+        color: $black-color;
+        font-size: 24px;
+        line-height: 29px;
+        font-family: $font-family;
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
+    p {
+        color: $text-color;
+        font-size: 18px;
+        line-height: 28px;
+        font-family: $font-family;
+        margin-bottom: 40px;
+        max-width: 280px;
+    }
+    .rowWrap {
+        align-items: self-end;
+        .rememberLabel {
+            color: $text-color;
+            font-size: 14px;
+            font-weight: 18px;
+            font-family: $font-family;
+        }
+        .forgotLinkWrap {
+            text-align: right;
+            a {
+                text-decoration: none;
+                color: $theme-color;
+                font-size: 14px;
+                font-weight: 18px;
+                font-family: $font-family;
+                vertical-align: text-top;
+            }
+        }
+    }
+    .frmLabel {
+        font-size: 14px;
+        font-family: $font-family;
+        color: $black-color;
+        line-height: 18px;
+        font-weight: 600;
+    }
+    .btnSubmit {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: $theme-color;
+        color: $white-color;
+        font-size: 14px;
+        line-height: 19px;
+        font-family: $font-family;
+        margin-bottom: 20px;
+        border: none
+    }
+    .spnLabel {
+        color: $black-color;
+        font-size: 14px;
+        line-height: 19px;
+        font-family: $font-family;
+    }
+    .createAccountLink {
+        text-decoration: none;
+        color: $theme-color;
+        font-size: 14px;
+        font-weight: 18px;
+        font-family: $font-family;
+    }
+}
+.marginBottom60 {
+    margin-bottom: 60px;
+}
+
+@media screen and (max-width: 576px) {
+    .spnLabelWrap {
+        display: block;
+        text-align: center;
+    }
+    .forgotLinkWrap {
+        text-align: center !important;
+    }
+    .rememberLabel {
+        display: table;
+        margin: 0 auto
+    }
+}
