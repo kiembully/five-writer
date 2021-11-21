@@ -21,7 +21,7 @@ const Login = ({data}) => {
                 <span>
 
                     <div className={loginStyles.loginFormOuter}>
-                        <h1>It's good to have you back</h1>
+                        <h1>It&apos;s good to have you back</h1>
                         <p>Welcome back! Please login to your account.</p>
 
                         <Form>
