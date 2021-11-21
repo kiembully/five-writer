@@ -50,7 +50,7 @@ const Login = ({data}) => {
                             Login
                         </button>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Text className="text-muted" className={loginStyles.spnLabelWrap}>
+                            <Form.Text className={`${loginStyles.spnLabelWrap} text-muted`}>
                                     <span className={loginStyles.spnLabel}>Not Registered yet? </span>
                                     <Link href='/register'><a className={loginStyles.createAccountLink}>Create an account</a></Link>
                                 </Form.Text>
