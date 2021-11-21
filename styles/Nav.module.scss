@@ -1,0 +1,60 @@
+@import "../styles/variable.scss";
+
+$primary-padding: 30px 2rem;
+
+.nav {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: $primary-padding;
+    ul {
+        display: contents;
+    }
+    a {
+        font-style: $font-family;
+        text-decoration: none;
+    }
+    a.externalLink {
+        color: #96AABE;
+        font-size: 14px;
+        line-height: 18px;
+    }
+    li {
+        list-style-type: none;
+        padding: 0 12.5px;
+        align-self: center;
+    }
+    li:first-child {
+        padding: 0;
+    }
+    li:last-child {
+        padding-right: 0;
+    }
+    .brand {
+        color: #2CBEFF;
+        font-family: $font-family;
+        font-size: 20px;
+        line-height: 24px;
+    }
+    .navBtn {
+        display: block;
+        width: 130px;
+        padding: 9px;
+        border-radius: 100px;
+        border: 2px solid #2CBEFF;
+        font-size: 16px;
+        line-height: 19px;
+        text-align: center
+    }
+    .loginBtn {
+        color: $theme-color
+    }
+    .registerBtn {
+        color: $white-color;
+        background-color: $theme-color
+    }
+}
+.fillSpace {
+    flex: 1 1 auto;
+}

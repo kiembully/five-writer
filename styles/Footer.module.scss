@@ -1,0 +1,14 @@
+@import "../styles/variable.scss";
+
+.footerWrap {
+    margin: 10rem auto 2rem auto;
+    display: block;
+    width: 100%;
+    text-align: center;
+    p {
+        color: #96AABE;
+        font-size: 14px;
+        line-height: 18px;
+        font-family: $font-family;
+    }
+}
