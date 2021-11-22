@@ -45,7 +45,6 @@ const UserEntry = (props) => {
 
         apiHelper("user/login", "POST", formData, null)
         .then((res) => {
-            console.log(res)
             setApiLoader(false);
             const response = res.data;
             if (response.status) {
@@ -100,7 +99,8 @@ const UserEntry = (props) => {
                         <p>{props.pitch}</p>
 
                         <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                        <Row className="mb-3" style={router.pathname == '/register' ? {display: 'flex'} : {display:'none'}}>
+                        {router.pathname == '/register' ? 
+                        <Row className="mb-3">
                             <Form.Group as={Col} controlId="formGridFirstName">
                             <Form.Label className={loginStyles.frmLabel}>First Name</Form.Label>
                             <Form.Control 
@@ -125,6 +125,8 @@ const UserEntry = (props) => {
                             />
                             </Form.Group>
                         </Row>
+                        : ''
+                        }
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label className={loginStyles.frmLabel}>Email address</Form.Label>
                             <Form.Control 
@@ -137,8 +139,8 @@ const UserEntry = (props) => {
                             />
                             <Form.Control.Feedback className={loginStyles.errors} type="invalid">Invalid Email!</Form.Control.Feedback>
                         </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="formBasicPassword" style={router.pathname === '/forgot' ? {display:'none'} : {display: 'block'}}>
+                        {router.pathname != '/forgot'?
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label className={loginStyles.frmLabel}>Password</Form.Label>
                             <Form.Control 
                             type="password" 
@@ -150,7 +152,9 @@ const UserEntry = (props) => {
                             />
                             <Form.Control.Feedback className={loginStyles.errors} type="invalid">Invalid Password!</Form.Control.Feedback>
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicCheckbox" style={!!props.checkBox  ? {display: 'block'} : {display: 'none'}}>
+                        :''}
+                        {!!props.checkBox ?
+                        <Form.Group className="mb-3" controlId="formBasicCheckbox" >
                             <Row className={loginStyles.rowWrap}>
                                 <Col sm>
                                     <Form.Check 
@@ -159,21 +163,28 @@ const UserEntry = (props) => {
                                     label={props.checkBox}
                                     value={terms}
                                     onChange={termsChangeHandler}
+                                    disabled={apiLoader}
                                     />
-                                    <Form.Text className="text-muted" style={router.pathname=='/register' ? {display:'inline-block'}: {display:'none'}}>
-                                         <Link href='/terms'><a className={loginStyles.forgotLink}>Terms and Conditions</a></Link>
-                                    </Form.Text>
+                                    {router.pathname=='/register' ?
+                                    <Form.Text className="text-muted">
+                                        <Link href='/terms'><a className={loginStyles.forgotLink}>Terms and Conditions</a></Link>
+                                    </Form.Text> 
+                                    : ''}
                                 </Col>
-                                <Col sm className={loginStyles.forgotLinkWrap} style={router.pathname=='/register' ? {display:'none'}: {display:'block'}}>
+                                {router.pathname!='/register'?
+                                <Col sm className={loginStyles.forgotLinkWrap}>
                                     <Form.Text className="text-muted">
                                         <Link href='/forgot'><a>Forgot Password?</a></Link>
                                     </Form.Text>
                                 </Col>
+                                :''}
                             </Row>
                         </Form.Group>
+                        : ''
+                        }
                         <div className={loginStyles.btnSubmitWrap}>
-                            <div style={!!requestMessage ? {display: 'block'} : {display: 'none'}}>{requestMessage}</div>
-                            <button className={`${loginStyles.btnSubmit} hvr-grow`} type="submit">
+                            {!!requestMessage ? <div>{requestMessage}</div> : ''}
+                            <button className={`${loginStyles.btnSubmit} hvr-grow`} type="submit" disabled={apiLoader}>
                                 {apiLoader?<Spinner animation="border" variant="light" size="sm" />:props.btnText}
                             </button>
                         </div>
