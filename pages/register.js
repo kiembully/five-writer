@@ -1,8 +1,18 @@
+import UserEntry from "../components/UserEntry";
+
 const Register = () => {
     return (
-        <div>
-            Register
-        </div>
+        <>
+            <UserEntry 
+            title="Create Account"
+            pitch="Create a greate platform for Freelance Writer"
+            checkBox="I have read the "
+            btnText="Register"
+            optionText="Already have an account?"
+            optionAction="Login"
+            optionDestination="/login"
+            />
+        </>
     );
 }
 
