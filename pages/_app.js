@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
+    <Layout pageMeta={{}}>
       <Component {...pageProps} />
     </Layout>
   )

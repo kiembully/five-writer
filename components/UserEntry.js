@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import utilStyles from '../styles/Layout.module.scss'
@@ -6,10 +5,14 @@ import loginStyles from '../styles/UserEntry.module.scss'
 import imgBanner from '../public/login.svg'
 import { Form, Row, Col, Spinner } from 'react-bootstrap';
 import 'hover.css'
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/dist/client/router';
 import { apiHelper } from '../helper/apiHelper';
-import { route } from 'next/dist/server/router';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
+import {useDropzone} from 'react-dropzone';
+import imgUpload from '../public/upload_icon.svg'
+import fileUpload from '../public/file_icon.svg'
 
 const UserEntry = (props) => {
     const [validated, setValidated] = useState(false);
@@ -19,7 +22,22 @@ const UserEntry = (props) => {
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
     const [terms, setTerms] = useState(Boolean);
+    const [tel, setTel] = useState('');
+    const [telError, setTelError] = useState(true);
     const [apiLoader, setApiLoader] = useState(false);
+    const {acceptedFiles, getRootProps, getInputProps} = useDropzone({maxFiles:1});
+    const files = acceptedFiles.map((file, i) => (
+        <li className={loginStyles.fileDisplay} key={file.path}>
+           <Image src={fileUpload} width={23} height={30} alt='uploaded file icon' /> 
+           <span>{file.path} <button type="button" onClick={() => removeFile(i)}>x</button></span>
+        </li>
+    ));
+    const removeFile = file => {
+        const newFiles = [...files];     // make a var for the new array
+        acceptedFiles.splice(file, 1);        // remove the file from the array
+        setFileError(true)
+    };
+    const [fileError, setFileError] = useState(false);
 
     const emailChangeHandler = (event) => {
         setEmail(event.target.value);
@@ -36,6 +54,11 @@ const UserEntry = (props) => {
     const lastnameChangeHandler = (event) => {
         setLastName(event.target.value)
     }
+    const telephoneChangeHandler = (event) => {
+        setTel(event);
+        setTelError(tel.trim().length > 9)
+    }
+    
     function submitLoginHandler() {
         setApiLoader(true);
         const formData = new FormData();
@@ -54,6 +77,8 @@ const UserEntry = (props) => {
                 setRequestMessage(response.message)
             }
             setValidated(false)
+            setTelError(false)
+            setFileError(false)
         })
         .catch((error) => console.error(`Error: ${error}`));
     }
@@ -80,15 +105,12 @@ const UserEntry = (props) => {
       }
   
       setValidated(true);
+      setTelError(tel.trim().length > 10)
+      setFileError(files.length<1)
     };
     
     return (
         <div className={utilStyles.containerOuter}>
-        <Head>
-            <title>Login</title>
-            <meta name='keywords' content='login'></meta>
-            <meta name='description' content='login form'></meta>
-        </Head>
         
         <div className={utilStyles.containerWrap}>
             <div className={`${utilStyles.containerInner} ${utilStyles.containerReverse}`}>
@@ -153,6 +175,47 @@ const UserEntry = (props) => {
                             <Form.Control.Feedback className={loginStyles.errors} type="invalid">Invalid Password!</Form.Control.Feedback>
                         </Form.Group>
                         :''}
+                        {router.pathname=='/register'?
+                        <>
+                        <Form.Group className="mb-3" controlId="formBasicTelephone">
+                            <Form.Label className={loginStyles.frmLabel}>Mobile Number</Form.Label>
+                            <PhoneInput
+                            inputClass={loginStyles.telInput}
+                            placeholder="+x (xxx) xxx-xxxx"
+                            country={'us'}
+                            value={tel}
+                            onChange={telephoneChangeHandler}
+                            isValid={telError}
+                            required
+                            disabled={apiLoader}
+                            />
+                            <Form.Control.Feedback className={loginStyles.errors} type="invalid" style={telError?{display:'none'}:{display:'block'}}>Invalid mobile number!</Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicTelephone">
+                            <Form.Label className={loginStyles.frmLabel}>Upload your CV</Form.Label>
+                            <section className={loginStyles.secUpload}>
+                            <div className={loginStyles.dropzone} {...getRootProps()} style={files.length>0?{border: '3px dashed #2CBEFF'}:{border: '3px dashed #96AABE'}}>
+                                <input 
+                                required 
+                                disabled={apiLoader || files.length > 0} 
+                                {...getInputProps()} 
+                                />
+                                {files.length>0?
+                                files
+                                :
+                                <>
+                                <Image src={imgUpload} width={35} height={30} alt='upload icon' />
+                                <p>Drag and drop here, or <span>browse</span></p>
+                                </>
+                                }
+                            </div>
+                            </section>
+                            {files.length < 1 ?
+                            <Form.Control.Feedback className={loginStyles.errors} style={fileError?{display:'block'}:{display:'none'}} type="invalid" >CV required!</Form.Control.Feedback>
+                            :''}
+                        </Form.Group>
+                        </>
+                        :''}
                         {!!props.checkBox ?
                         <Form.Group className="mb-3" controlId="formBasicCheckbox" >
                             <Row className={loginStyles.rowWrap}>
@@ -164,6 +227,7 @@ const UserEntry = (props) => {
                                     value={terms}
                                     onChange={termsChangeHandler}
                                     disabled={apiLoader}
+                                    required={router.pathname=='/register'}
                                     />
                                     {router.pathname=='/register' ?
                                     <Form.Text className="text-muted">

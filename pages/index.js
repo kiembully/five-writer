@@ -9,11 +9,11 @@ import 'hover.css';
 export default function Home() {
   return (
     <div className={utilStyles.containerOuter}>
-      <Head>
+      {/* <Head>
         <title>Home</title>
         <meta name='keywords' content='home'></meta>
         <meta name='description' content='home content'></meta>
-      </Head>
+      </Head> */}
       
       <div className={utilStyles.containerWrap}>
         <div className={utilStyles.containerInner}>
