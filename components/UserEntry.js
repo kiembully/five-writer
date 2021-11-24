@@ -97,8 +97,6 @@ const UserEntry = (props) => {
                 setRequestMessage(response.message)
             }
             setValidated(false)
-            // setTelError(false)
-            // setFileError(false)
         })
         .catch((error) => console.error(`Error: ${error}`));
     }
@@ -117,15 +115,15 @@ const UserEntry = (props) => {
 
         apiHelper("user/signup", "POST", formData, null)
         .then((res) => {
-            setApiLoader(false);
             const response = res.data;
             if (response.status) {
-                router.push('/orders')
+                submitLoginHandler();
             } else {
+                setApiLoader(false);
                 setRequestMessage(response.message)
             }
             setValidated(false)
-            setTelError(false)
+            setTelError(true)
             setFileError(false)
         })
         .catch((error) => console.error(`Error: ${error}`));
