@@ -3,7 +3,7 @@
     "short_name": "Next PWA",
     "icons": [
       {
-        "src": "/icon.png",
+        "src": "/icon-192x192.png",
         "sizes": "192x192",
         "type": "image/png",
         "purpose": "maskable any"
@@ -18,7 +18,7 @@
     ],
     "theme_color": "#FFFFFF",
     "background_color": "#FFFFFF",
-    "start_url": "/index.html",
+    "start_url": "https://five-writer.vercel.app/",
     "display": "standalone",
     "orientation": "portrait"
   }
