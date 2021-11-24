@@ -3,7 +3,7 @@ import Link from 'next/link';
 import utilStyles from '../styles/Layout.module.scss'
 import loginStyles from '../styles/UserEntry.module.scss'
 import imgBanner from '../public/login.svg'
-import { Form, Row, Col, Spinner } from 'react-bootstrap';
+import { Form, Row, Col, Spinner, Modal, Button } from 'react-bootstrap';
 import 'hover.css'
 import React, { useState } from 'react';
 import { useRouter } from 'next/dist/client/router';
@@ -16,15 +16,20 @@ import fileUpload from '../public/file_icon.svg'
 
 const UserEntry = (props) => {
     const [validated, setValidated] = useState(false);
+    const [forgotValidated, setForgotValidated] = useState(false);
     const [requestMessage, setRequestMessage] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [security, setSecurity] = useState('');
+    const [forgotMessage, setForgotMessage] = useState('');
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
     const [terms, setTerms] = useState(Boolean);
     const [tel, setTel] = useState('');
     const [telError, setTelError] = useState(true);
     const [apiLoader, setApiLoader] = useState(false);
+    const [forgotApiLoader, setForgotApiLoader] = useState(false);
     const {acceptedFiles, getRootProps, getInputProps} = useDropzone({maxFiles:1});
     const files = acceptedFiles.map((file, i) => (
         <li className={loginStyles.fileDisplay} key={file.path}>
@@ -32,6 +37,11 @@ const UserEntry = (props) => {
            <span>{file.path} <button type="button" onClick={() => removeFile(i)}>x</button></span>
         </li>
     ));
+    // Modal starts 
+    const [show, setShow] = useState(false);
+    const modalClose = () => setShow(false);
+    const modalShow = () => setShow(true);
+    // Modal ends 
     const removeFile = file => {
         const newFiles = [...files];     // make a var for the new array
         acceptedFiles.splice(file, 1);        // remove the file from the array
@@ -44,6 +54,12 @@ const UserEntry = (props) => {
     }
     const passwordChangeHandler = (event) => {
         setPassword(event.target.value);
+    };
+    const newPasswordChangeHandler = (event) => {
+        setNewPassword(event.target.value);
+    };
+    const secrurityChangeHandler = (event) => {
+        setSecurity(event.target.value);
     };
     const termsChangeHandler = (event) => {
         setTerms(event.target.value)
@@ -77,16 +93,65 @@ const UserEntry = (props) => {
                 setRequestMessage(response.message)
             }
             setValidated(false)
-            setTelError(false)
-            setFileError(false)
+            // setTelError(false)
+            // setFileError(false)
         })
         .catch((error) => console.error(`Error: ${error}`));
     }
     function submitAccountHandler() {
         alert('Register Account on works')
     }
-    function submitNewPasswordHandler() {
-        alert('Forgot Password on works')
+    function confirmEmailHandler() {
+        setApiLoader(true);
+        const formData = new FormData();
+
+        formData.append("email", email);
+
+        apiHelper("user/confirmemail", "POST", formData, null)
+        .then((res) => {
+            setApiLoader(false);
+            const response = res.data;
+            if (response.status) {
+                localStorage.setItem('email_token', response.data.email_token)
+                modalShow();
+            } else {
+                setRequestMessage(response.message)
+            }
+            setValidated(false)
+        })
+        .catch((error) => console.error(`Error: ${error}`));
+    }
+    const submitNewPasswordHandler = (event) => {
+        const form = event.currentTarget;
+        event.preventDefault();
+        const formData = new FormData();
+
+        formData.append("email_token", localStorage.getItem('email_token'));
+        formData.append("security_code", security);
+        formData.append("new_password", newPassword);
+
+        if (form.checkValidity() === false) {
+          event.stopPropagation();
+        } else {
+            setForgotApiLoader(true);
+            apiHelper("user/resetpassword", "PUT", formData, null)
+            .then((res) => {
+                setForgotApiLoader(false);
+                const response = res.data;
+                if (response.status) {
+                    modalClose();
+                    localStorage.removeItem('email_token');
+                    router.push('/login');
+                } else {
+                    setForgotMessage(response.message);
+                }
+                setForgotValidated(false)
+            })
+            .catch((error) => console.error(`Error: ${error}`));
+        }
+
+        setForgotValidated(true);
+
     }
 
     const router = useRouter();
@@ -100,7 +165,7 @@ const UserEntry = (props) => {
         if (router.pathname == '/login') {
             submitLoginHandler()
         } else {
-            (router.pathname == '/register') ? submitAccountHandler() : submitNewPasswordHandler()
+            (router.pathname == '/register') ? submitAccountHandler() : confirmEmailHandler()
         }
       }
   
@@ -169,6 +234,7 @@ const UserEntry = (props) => {
                             placeholder="Password" 
                             value={password}
                             onChange={passwordChangeHandler}
+                            minLength={8}
                             required
                             disabled={apiLoader}
                             />
@@ -269,6 +335,50 @@ const UserEntry = (props) => {
                 </span>
             </div>
         </div>
+
+        {/* modal  */}
+        <Modal show={show} onHide={modalClose}>
+            <Modal.Header closeButton>
+            <Modal.Title>Confirm new Password</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form noValidate validated={forgotValidated} onSubmit={submitNewPasswordHandler}>
+                    <Form.Group className="mb-3" controlId="formForgotPassword">
+                        <Form.Label className={loginStyles.forgotLabel}>Password</Form.Label>
+                        <Form.Control 
+                        type="password" 
+                        placeholder="New Password" 
+                        value={newPassword}
+                        onChange={newPasswordChangeHandler}
+                        minLength={8}
+                        required
+                        disabled={forgotApiLoader}
+                        />
+                        <Form.Control.Feedback className={loginStyles.errors} type="invalid">Invalid Password!</Form.Control.Feedback>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formSecurityCode">
+                        <Form.Label className={loginStyles.forgotLabel}>Security Code</Form.Label>
+                        <Form.Control 
+                        type="text" 
+                        placeholder="Security Code" 
+                        value={security}
+                        onChange={secrurityChangeHandler}
+                        minLength={6}
+                        required
+                        disabled={forgotApiLoader}
+                        />
+                        <Form.Control.Feedback className={loginStyles.errors} type="invalid">Invalid Security Code!</Form.Control.Feedback>
+                    </Form.Group>
+                    
+                    <div className={loginStyles.btnSubmitWrap}>
+                        {!!forgotMessage ? <div>{forgotMessage}</div> : ''}
+                        <button className={`${loginStyles.btnSubmit} hvr-grow`} type="submit" disabled={forgotApiLoader}>
+                            {forgotApiLoader?<Spinner animation="border" variant="light" size="sm" />:props.btnText}
+                        </button>
+                    </div>
+                </Form>
+            </Modal.Body>
+        </Modal>
         
         </div>
     );

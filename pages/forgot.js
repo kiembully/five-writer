@@ -1,6 +1,12 @@
 import UserEntry from "../components/UserEntry";
 
 const forgot = () => {
+    if (process.browser) {
+    window.onbeforeunload = () => {
+        console.log('asdasd')
+    }
+    }
+    
     return (
         <>
             <UserEntry 

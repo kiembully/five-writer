@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let url = "https://86olsy8spl.execute-api.us-east-2.amazonaws.com/dev/";
-let dev = "https://web.5writer.com/"
+let live = "https://web.5writer.com/"
 
 export const apiHelper = (api, method, data, headers) => {
     const apiUrl = url + api;
