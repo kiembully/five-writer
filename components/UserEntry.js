@@ -314,7 +314,7 @@ const UserEntry = (props) => {
                         }
                         <div className={loginStyles.btnSubmitWrap}>
                             {!!requestMessage ? <div>{requestMessage}</div> : ''}
-                            <button className={`${loginStyles.btnSubmit} hvr-grow`} type="submit" disabled={apiLoader}>
+                            <button className={`${loginStyles.btnSubmit} hvr-shadow`} type="submit" disabled={apiLoader}>
                                 {apiLoader?<Spinner animation="border" variant="light" size="sm" />:props.btnText}
                             </button>
                         </div>
@@ -372,7 +372,7 @@ const UserEntry = (props) => {
                     
                     <div className={loginStyles.btnSubmitWrap}>
                         {!!forgotMessage ? <div>{forgotMessage}</div> : ''}
-                        <button className={`${loginStyles.btnSubmit} hvr-grow`} type="submit" disabled={forgotApiLoader}>
+                        <button className={`${loginStyles.btnSubmit} hvr-shadow`} type="submit" disabled={forgotApiLoader}>
                             {forgotApiLoader?<Spinner animation="border" variant="light" size="sm" />:props.btnText}
                         </button>
                     </div>
