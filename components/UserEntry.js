@@ -27,6 +27,8 @@ const UserEntry = (props) => {
     const [lastname, setLastName] = useState('');
     const [terms, setTerms] = useState(Boolean);
     const [tel, setTel] = useState('');
+    const [isoCode, setIsoCode] = useState('');
+    const [dialCode, setDialCode] = useState('');
     const [telError, setTelError] = useState(true);
     const [apiLoader, setApiLoader] = useState(false);
     const [forgotApiLoader, setForgotApiLoader] = useState(false);
@@ -34,7 +36,7 @@ const UserEntry = (props) => {
     const files = acceptedFiles.map((file, i) => (
         <li className={loginStyles.fileDisplay} key={file.path}>
            <Image src={fileUpload} width={23} height={30} alt='uploaded file icon' /> 
-           <span>{file.path} <button type="button" onClick={() => removeFile(i)}>x</button></span>
+           <span>{file.path} <button className={`${loginStyles.deleteUpload} hvr-buzz-out`} type="button" onClick={() => removeFile(i)}>x</button></span>
         </li>
     ));
     // Modal starts 
@@ -70,8 +72,10 @@ const UserEntry = (props) => {
     const lastnameChangeHandler = (event) => {
         setLastName(event.target.value)
     }
-    const telephoneChangeHandler = (event) => {
+    const telephoneChangeHandler = (event, country) => {
         setTel(event);
+        setIsoCode(country.countryCode)
+        setDialCode(`+${country.dialCode}`);
         setTelError(tel.trim().length > 9)
     }
     
@@ -99,7 +103,32 @@ const UserEntry = (props) => {
         .catch((error) => console.error(`Error: ${error}`));
     }
     function submitAccountHandler() {
-        alert('Register Account on works')
+        setApiLoader(true);
+        const formData = new FormData();
+
+        formData.append("firstname", firstname);
+        formData.append("lastname", lastname);
+        formData.append("email", email);
+        formData.append("password", password);
+        formData.append("iso_code", isoCode);
+        formData.append("dial_code", dialCode);
+        formData.append("mobile", tel.slice((dialCode.replace(/\+/g, "")).length));
+        formData.append("writer_cv", acceptedFiles[0]);
+
+        apiHelper("user/signup", "POST", formData, null)
+        .then((res) => {
+            setApiLoader(false);
+            const response = res.data;
+            if (response.status) {
+                router.push('/orders')
+            } else {
+                setRequestMessage(response.message)
+            }
+            setValidated(false)
+            setTelError(false)
+            setFileError(false)
+        })
+        .catch((error) => console.error(`Error: ${error}`));
     }
     function confirmEmailHandler() {
         setApiLoader(true);

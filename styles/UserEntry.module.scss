@@ -151,6 +151,14 @@
             }
         }
     }
+    .deleteUpload {
+        border-radius: 100%;
+        font-size: 16px;
+        padding: 0px 6px 3px 6px;
+        line-height: 16px;
+        margin: 0 10px;
+        display: inline-block;
+    }
 }
 
 @media screen and (max-width: 576px) {
