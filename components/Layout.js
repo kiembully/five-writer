@@ -25,10 +25,6 @@ const Layout = ({children, pageMeta}) => {
                 <meta name='keywords' content={meta.keywords}></meta>
                 <meta name='description' content={meta.description}></meta>
                 <meta property="og:url" content={meta.url} />
-
-                <link rel="manifest" href="/manifest.json" />
-                <link rel="apple-touch-icon" href="/icon.png"></link>
-                <meta name="theme-color" content="#fff" />
             </Head>
             <TopNav />
             <div className={layoutStyles.container}>
