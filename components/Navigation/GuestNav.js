@@ -53,7 +53,7 @@ const GuestNav = () => {
             <Offcanvas.Header closeButton>
             <Offcanvas.Title>
                 {!!user_token?
-                 <button className={navStyles.logoutBtn} type="button" onClick={logoutUser}><MdLogout /></button>
+                 <button aria-label="menu button" className={navStyles.logoutBtn} type="button" onClick={logoutUser}><MdLogout /></button>
                 :<span className={navStyles.mobBrand}>5Writer</span>}
             </Offcanvas.Title>
             </Offcanvas.Header>
