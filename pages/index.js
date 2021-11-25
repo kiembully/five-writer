@@ -22,7 +22,7 @@ export default function Home() {
               <h1>Become a Freelance</h1>
               <h2>Writer with Us</h2>
               <p>5writer.com is always in search for skilled, talented and experienced writers. If you enjoy writing, like to share your knowledge with others, you are welcome to register with us!</p>
-              <Link href='/'><a className="hvr-pulse">Become a Writer</a></Link>
+              <Link href='/register'><a className="hvr-pulse">Become a Writer</a></Link>
             </div>
           </span>
           <span>

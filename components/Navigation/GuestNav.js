@@ -1,13 +1,15 @@
 import Link from 'next/link';
-import navStyles from '../styles/Nav.module.scss';
+import Image from 'next/image';
+import navStyles from './Nav.module.scss';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import { MdMenu } from "react-icons/md";
+import { MdMenu, MdLogout } from "react-icons/md";
 import 'hover.css'
 import { useRouter } from 'next/dist/client/router';
+import companyLogo from '../../public/5writer-logo.svg'
 
-const TopNav = () => {
+const GuestNav = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -16,7 +18,12 @@ const TopNav = () => {
     function handleTopMenu() {
         const arr = ['/login', '/register', '/forgot']
         return arr.includes(router.pathname)
-    }   
+    }
+    const logoutUser = () => {
+        handleClose();
+        localStorage.clear();
+        router.push('/')
+    }
     
     return (
         <>
@@ -24,14 +31,19 @@ const TopNav = () => {
             <ul >
                 <li className={navStyles.webNav}><Link href='/'><a className={`${navStyles.brand} hvr-grow`}>Logo Here</a></Link></li>
                 <li className={navStyles.mobileNav}><Button className={navStyles.btnNav} onClick={handleShow}><MdMenu /></Button></li>
-                <span className={navStyles.fillSpace}></span>
+                <li className={navStyles.fillSpace}></li>
                 {!handleTopMenu()?
                 <>
                 <li className={navStyles.webNav}><Link href='mailto:support@cheapestessay.com'><a className={navStyles.externalLink}>Email: support@cheapestessay.com</a></Link></li>
                 <li className={navStyles.webNav}><Link href='https://api.whatsapp.com/send?phone=19094411414'><a className={navStyles.externalLink}>WhatsApp: +1 (909) 441-1414</a></Link></li>
-                <span className={navStyles.fillSpace}></span>
+                <li className={navStyles.fillSpace}></li>
+                {!!user_token?
+                <li><Link href='/dashboard'><a className={`${navStyles.loginBtn} ${navStyles.navBtn} hvr-grow`}>Dashboard</a></Link></li>:
+                <>
                 <li><Link href='/login'><a className={`${navStyles.loginBtn} ${navStyles.navBtn} hvr-grow`}>Login</a></Link></li>
                 <li><Link href='/register'><a className={`${navStyles.registerBtn} ${navStyles.navBtn} hvr-grow`}>Register</a></Link></li>
+                </>
+                }
                 </>
                 :''}
             </ul>
@@ -39,13 +51,23 @@ const TopNav = () => {
 
         <Offcanvas show={show} onHide={handleClose}>
             <Offcanvas.Header closeButton>
-            <Offcanvas.Title><span className={navStyles.mobBrand}>Five Writer</span></Offcanvas.Title>
+            <Offcanvas.Title>
+                {!!user_token?
+                 <button className={navStyles.logoutBtn} type="button" onClick={logoutUser}><MdLogout /></button>
+                :<span className={navStyles.mobBrand}>5Writer</span>}
+            </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <nav className={`${navStyles.nav} ${navStyles.navColumn}`}>
                     <ul>
-                        <li><Link href='/'><a className={`${navStyles.brand} hvr-grow`}>Logo Here</a></Link></li>
-                        <span className={navStyles.fillSpace}></span>
+                        <li>
+                            <Link href='/'>
+                            <a className={`${navStyles.brandMobile} hvr-grow`}>
+                                <Image src={companyLogo} width={90} height={45} alt='5writer logo' />
+                            </a>
+                            </Link>
+                        </li>
+                        <li className={navStyles.fillSpace}></li>
                         <li><Link href='https://api.whatsapp.com/send?phone=19094411414'><a className={navStyles.externalLink}>WhatsApp: +1 (909) 441-1414</a></Link></li>
                         <li><Link href='mailto:support@cheapestessay.com'><a className={navStyles.externalLink}>Email: support@cheapestessay.com</a></Link></li>
                     </ul>
@@ -56,4 +78,4 @@ const TopNav = () => {
     );
 }
 
-export default TopNav;
+export default GuestNav;

@@ -1,7 +1,7 @@
-@import "../styles/variable.scss";
+@import "../../styles/variable.scss";
 
 $primary-padding: 30px 2rem;
-
+// GUEST NAV STYLES
 .nav {
     display: flex;
     width: 100%;
@@ -18,6 +18,7 @@ $primary-padding: 30px 2rem;
     a {
         font-style: $font-family;
         text-decoration: none;
+        display: flex;
     }
     a.externalLink {
         color: #96AABE;
@@ -56,6 +57,11 @@ $primary-padding: 30px 2rem;
         font-size: 20px;
         line-height: 24px;
     }
+    .brandMobile {
+        background-color: $profile-bg;
+        border-radius: 5px;
+        padding: 5px 5px 0 5px ;
+    }
     .navBtn {
         display: block;
         width: 130px;
@@ -83,12 +89,103 @@ $primary-padding: 30px 2rem;
     font-size: 20px;
     line-height: 24px;
 }
+.logoutBtn {
+    background-color: $white-color;
+    color: $theme-color;
+    border: 2px solid #2CBEFF;
+    border-radius: 5px;
+    font-size: 20px;
+    line-height: 16px;
+    padding: 2px 5px
+}
 
+// PROFILE NAV STYLES
+.profileNavWrap {
+    width: 100%;
+    background-color: $profile-bg;
+    .nav {
+        padding: 5px 2rem 2px 2rem;
+        ul {
+            li {
+                padding: 0 15px;
+                vertical-align: middle;
+            }
+        }
+    }
+    .userInfoWrap {
+        min-width: 150px;
+        background-color: $white-color;
+        border-radius: 5px;
+        padding: 4px 10px;
+        display: flex;
+        align-items: center;
+        span {
+            font-size: 14px;
+            line-height: 18px;
+            font-family: $font-family;
+            font-weight: 500;
+        }
+        .userIcons {
+            padding-right: 9px;
+            display: flex;
+        }
+        .uiLabel {
+            color: $black-color;
+            padding-right: 9px;
+        }
+        .uiValue {
+            color: $profile-bg;
+            flex: 1;
+        }
+    }
+    
+}
+// remove caret
+.profileDrop {
+    &.transparent {
+        button {
+            background-color: transparent !important
+        }
+    }
+    button {
+        color: $profile-bg;
+        font-size: 25px;
+        border-radius: 100%;
+        height: 30px;
+        width: 30px;
+        padding: 0;
+        background-color: $white-color;
+        overflow: hidden;
+        position: relative;
+        border: none;
+        svg {
+            position: absolute;
+            top: 2px;
+            left: 2.5px;
+            right: 0;
+        }
+    }
+    button::before {
+        display: none !important;
+    }
+    .dropWrap {
+        inset: 38px -38px auto auto !important;
+    }
+}
+
+
+// RESPONSIVE STARTS 
+@media screen and (max-width: 992px) {
+    .userInfoOuter {
+        display: none;
+    }
+}
 @media screen and (max-width: 768px) {
     .nav {
         padding: 15px 1rem;
         .navBtn {
-            width: 75px;
+            width: 100%;
+            min-width: 75px;
             padding: 6px;
             border: 2px solid #2CBEFF;
             font-size: 14px;

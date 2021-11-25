@@ -1,4 +1,4 @@
-const orders = () => {
+const dashboard = () => {
     return (
         <div>
             You are now logged in
@@ -6,4 +6,4 @@ const orders = () => {
     );
 }
 
-export default orders;
+export default dashboard;

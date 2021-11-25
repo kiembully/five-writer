@@ -1,5 +1,5 @@
 import layoutStyles from '../styles/Layout.module.scss'
-import TopNav from './TopNav';
+import Navigation from './Navigation'
 import Footer from './Footer';
 import Head from 'next/head';
 import { useRouter } from 'next/dist/client/router';
@@ -15,7 +15,7 @@ const Layout = ({children, pageMeta}) => {
         ...pageMeta
     }
     function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
+        return (string !== '') ? string.charAt(0).toUpperCase() + string.slice(1) : 'Home';
     }
     
     return (
@@ -26,7 +26,7 @@ const Layout = ({children, pageMeta}) => {
                 <meta name='description' content={meta.description}></meta>
                 <meta property="og:url" content={meta.url} />
             </Head>
-            <TopNav />
+            <Navigation />
             <div className={layoutStyles.container}>
                 <main className={layoutStyles.main}>
                     {children}

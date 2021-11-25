@@ -92,7 +92,7 @@ const UserEntry = (props) => {
             const response = res.data;
             if (response.status) {
                 localStorage.setItem('user_token', response.data.user_token);
-                router.push('/orders')
+                router.push('/dashboard')
             } else {
                 setRequestMessage(response.message)
             }
@@ -261,7 +261,7 @@ const UserEntry = (props) => {
                             placeholder="Password" 
                             value={password}
                             onChange={passwordChangeHandler}
-                            minLength={8}
+                            minLength={6}
                             required
                             disabled={apiLoader}
                             />
@@ -377,7 +377,7 @@ const UserEntry = (props) => {
                         placeholder="New Password" 
                         value={newPassword}
                         onChange={newPasswordChangeHandler}
-                        minLength={8}
+                        minLength={6}
                         required
                         disabled={forgotApiLoader}
                         />
