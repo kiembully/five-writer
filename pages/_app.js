@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps, data }) {
             router.push('/404')
         }
     }
-  }, [])
+  })
 
   return (
     <Layout pageMeta={{}}>
