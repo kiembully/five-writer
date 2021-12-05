@@ -34,7 +34,7 @@ const GuestNav = () => {
         <nav className={navStyles.nav}>
             <ul >
                 <li className={navStyles.webNav}><Link href='/'><a className={`${navStyles.brand} hvr-grow`}>Logo Here</a></Link></li>
-                <li className={navStyles.mobileNav}><Button className={navStyles.btnNav} onClick={handleShow}><MdMenu /></Button></li>
+                <li className={navStyles.mobileNav}><Button aria-label="menu button mobile" className={navStyles.btnNav} onClick={handleShow}><MdMenu /></Button></li>
                 <li className={navStyles.fillSpace}></li>
                 {!handleTopMenu()?
                 <>
