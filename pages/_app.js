@@ -10,20 +10,23 @@ function MyApp({ Component, pageProps }) {
   // prevent users from accessing prohibited page 
   const router = useRouter();
   useEffect(() => {
-      if (!router.isReady) return;
+      function authGuard() {
+        if (!router.isReady) return;
 
-      const protectedPage = ['/dashboard'];
-      const userEntryPage = ['/login', '/register', '/forgot'];
-      const user_token = typeof window !== 'undefined' ? localStorage.getItem('user_token') : null;
-      if (!!user_token) {
-         if (userEntryPage.includes(router.pathname)) {
-             router.push('/404')
-         }
-      } else {
-          if (protectedPage.includes(router.pathname)) {
+        const protectedPage = ['/dashboard'];
+        const userEntryPage = ['/login', '/register', '/forgot'];
+        const user_token = typeof window !== 'undefined' ? localStorage.getItem('user_token') : null;
+        if (!!user_token) {
+          if (userEntryPage.includes(router.pathname)) {
               router.push('/404')
           }
+        } else {
+            if (protectedPage.includes(router.pathname)) {
+                router.push('/404')
+            }
+        }
       }
+      authGuard() // eslint-disable-line react-hooks/exhaustive-deps
   }, [])
 
   return (

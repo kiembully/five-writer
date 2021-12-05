@@ -18,26 +18,10 @@ import qualification from '../../public/dashboard-nav-icons/qualification.svg'
 import qualificationActive from '../../public/dashboard-nav-icons/qualification-active.svg'
 import writersRequest from '../../public/dashboard-nav-icons/writers-request.svg'
 import writersRequestActive from '../../public/dashboard-nav-icons/writers-request-active.svg'
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/dist/client/router';
 
 const DashboardNav = () => {
-    const [active, setActive] = useState();
-    const [navdashboard, setDashboard] = useState();
-    const [navqualification, setQualification] = useState();
-    const [navinfoTest, setInfoTest] = useState();
-    const [navessayTest, setEssayTest] = useState();
-    const [navmySpecialization, setMySpecialization] = useState();
-    const [navwritersRequest, setWritersRequest] = useState();
     const router = useRouter();
-    useEffect(() => {
-        setDashboard(router.pathname == '/dashboard')
-        setQualification(router.pathname == '/qualifications')
-        setInfoTest(router.pathname == '/information-test')
-        setEssayTest(router.pathname == '/essay-test')
-        setMySpecialization(router.pathname == '/my-specialization')
-        setWritersRequest(router.pathname == '/writers-request')
-    }, [])
 
     return (
         <div className={navStyles.dashboardNav}>
