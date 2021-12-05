@@ -241,9 +241,9 @@ const dashboard = () => {
                 {(rowsPerPage > 0
                     ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     : rows
-                ).map((row) => (
+                ).map((row, index) => (
                     <TableRow
-                    key={row.order_id}
+                    key={index}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                     <TableCell className={`${dashboardStyles.orderId} ${dashboardStyles.tblCell}`} align="center">{row.order_id}</TableCell>
