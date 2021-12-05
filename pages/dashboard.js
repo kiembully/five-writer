@@ -181,7 +181,7 @@ const rows = [
   ),
 ];
 
-const dashboard = () => {
+const Dashboard = () => {
     const [filterValue, setFilterValue] = useState(1);
     const handleFilterValue = (event) => {
         setFilterValue(event.target.value)
@@ -289,4 +289,4 @@ const dashboard = () => {
     );
 }
 
-export default dashboard;
+export default Dashboard;
