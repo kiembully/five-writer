@@ -1,6 +1,7 @@
 import { useRouter } from "next/dist/client/router";
 import GuestNav from "./GuestNav";
 import ProfileNav from "./ProfileNav";
+import DashboardNav from "./DashBoardNav";
 
 const Navigation = () => {
     const router = useRouter();
@@ -14,7 +15,10 @@ const Navigation = () => {
         {handleNavigation()?
         <GuestNav />
         :
+        <>
         <ProfileNav />
+        <DashboardNav />
+        </>
         }
         </>
     );

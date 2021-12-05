@@ -9,8 +9,22 @@ $primary-padding: 30px 2rem;
     margin: 0 auto;
     padding: $primary-padding;
     &.navColumn {
+        padding: 0 !important;
         flex-direction: column;
         height: 100%;
+        .mMenu {
+            text-align: left;
+            width: 100%;
+            a {
+                display: block;
+                color: $black-color;
+                font-size: 16px;
+                padding: 7px 0;
+                &.active {
+                    color: $profile-bg
+                }
+            }
+        }
     }
     ul {
         display: contents;
@@ -142,6 +156,17 @@ $primary-padding: 30px 2rem;
 }
 // remove caret
 .profileDrop {
+    >::before{
+        content: "▲";
+        position: absolute;
+        top: -21px;
+        right: 12px;
+        font-size: 20px;
+        color: #ffffff;
+    }
+    .dropdown-menu {
+        min-width: 16rem;
+    }
     &.transparent {
         button {
             background-color: transparent !important
@@ -169,7 +194,115 @@ $primary-padding: 30px 2rem;
         display: none !important;
     }
     .dropWrap {
-        inset: 38px -38px auto auto !important;
+        inset: 45px -38px auto auto !important;
+        >a {
+            padding-left: 0 !important;
+        }
+        .dropItem {
+            display: flex;
+            >span {
+                flex: auto;
+                align-self: center;
+                p {
+                    font-size: 16px;
+                    font-weight: 600;
+                    font-family: $font-family;
+                    line-height: 16px;
+                    margin: 0;
+                    color: $black-color;
+                }
+                label {
+                    font-size: 12px;
+                    font-weight: 300;
+                    font-family: $font-family;
+                    line-height: 15px;
+                    margin: 0;
+                    color: $text-color;
+                }
+            }
+            >.spnProfile {
+                width: 50px;
+                text-align: center;
+                color: $profile-bg !important;
+                >svg{
+                    font-size: 32px !important;
+                    background-color: #F6F8FC !important;
+                    border-radius: 100% !important;
+                    border: 2px solid #F6F8FC !important
+                }
+            }
+            >span:first-child {
+                width: 50px;
+                text-align: center;
+                color: $text-color;
+                >svg{
+                    font-size: 20px;
+                    border-radius: 100%;
+                    border-radius: 100%;
+                }
+            }
+        }
+    }
+}
+
+// DASHBOARD NAV 
+.dashboardNav {
+    width: 100%;
+    padding: 20px 2rem 2px 2rem;
+    .nav {
+        display: flex;
+        width: 100%;
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 5px 2rem 2px 2rem;
+        ul {
+            li {
+                padding: 0 15px;
+                vertical-align: middle;
+                flex: auto;
+                align-self: auto;
+                a {
+                    flex-flow: column;
+                    text-align: center;
+                    >div {
+                        display: block;
+                        border-radius: 100%;
+                        padding: 15px;
+                        margin-bottom: 10px;
+                        background-color: transparent;
+                        width: 60px;
+                        height: 60px;
+                        margin: 0 auto 10px auto;
+                        transition: all 0.3s ease;
+                    }
+                    label {
+                        display: block;
+                        cursor: pointer;
+                        color: $black-color;
+                        font-size: 16px;
+                    }
+                    &.active {
+                        color: $theme-color !important;
+                        >div {
+                            background-color: #D8F2FF !important;
+                        }
+                        label {
+                            color: $theme-color !important
+                        }
+                    }
+                }
+            }
+            li:hover {
+                a {
+                    >div {
+                        background-color: #D8F2FF;
+                    }
+                    label {
+                        color: $theme-color
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -182,7 +315,7 @@ $primary-padding: 30px 2rem;
 }
 @media screen and (max-width: 768px) {
     .nav {
-        padding: 15px 1rem;
+        padding: 15px 1rem !important;
         .navBtn {
             width: 100%;
             min-width: 75px;
@@ -201,5 +334,10 @@ $primary-padding: 30px 2rem;
                 display: list-item;
             }
         }
+    }
+
+    // dashboard styles 
+    .dashboardNav {
+        display: none;
     }
 }

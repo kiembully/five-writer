@@ -1,0 +1,93 @@
+@import "../styles/variable.scss";
+
+.dashboardWrap {
+    width: 100%;
+    border: 1px solid #96AABE;
+    border-radius: 10px;
+    background: #FBFDFF;
+    padding: 20px 10px;
+    .orderFilter {
+        display: flex;
+        >span {
+            flex: auto;
+            display: flex;
+        }
+        >span:first-child {
+            button {
+                flex: auto;
+                font-size: 14px;
+                line-height: 18px;
+                color: $text-color;
+                background-color: #FBFDFF;
+                border: 0.5px solid #96AABE;
+                padding: 10px 14px;
+                overflow: hidden;
+                transition: all 0.3s ease;
+                outline: none;
+                &.active {
+                    color: $white-color;
+                    background-color: $theme-color;
+                    border: 0.5px solid $theme-color;
+                    &:hover {
+                        color: $white-color;
+                    }
+                }
+                &:first-child {
+                    border-radius: 5px 0 0 5px;
+                }
+                &:last-child {
+                    border-radius: 0 5px 5px 0;
+                }
+                &:hover {
+                    color: $theme-color;
+                }
+            }
+        }
+        >span:nth-child(2) {
+            padding: 10px;
+        }
+        >span:last-child {
+            border: 1px solid #96AABE;
+            border-radius: 5px;
+            > {
+                flex: auto
+            }
+            >span {
+                padding: 5px;
+                color: $text-color;
+                overflow: hidden;
+            }
+            input {
+                width: 100%;
+                outline: none;
+                border: 0;
+                font-size: 14px;
+                line-height: 18px;
+                color: $black-color;
+                &::placeholder {
+                    color: $text-color
+                }
+            }
+        }
+    }
+    .tblContainer {
+        margin-top: 20px;
+        background-color: transparent;
+        box-shadow: none;
+        tr {
+            td, th {
+                border: none;
+            }
+        }
+        .tblCell {
+            color: #53606D;
+            font-family: $font-family;
+            font-size: 12px;
+            line-height: 20px;
+            font-weight: 600;
+            &.orderId {
+                color: $theme-color;
+            }
+        }
+    }
+}

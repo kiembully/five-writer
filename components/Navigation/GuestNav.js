@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import navStyles from './Nav.module.scss';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { MdMenu, MdLogout } from "react-icons/md";
 import 'hover.css'
@@ -10,10 +10,14 @@ import { useRouter } from 'next/dist/client/router';
 import companyLogo from '../../public/5writer-logo.svg'
 
 const GuestNav = () => {
+    const [user_token, set_user_token] = useState();
+    useEffect(() => {
+        set_user_token(typeof window !== 'undefined' ? localStorage.getItem('user_token') : null)
+    }, [])
+
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const user_token = typeof window !== 'undefined' ? localStorage.getItem('user_token') : null;
     const router = useRouter();
     function handleTopMenu() {
         const arr = ['/login', '/register', '/forgot']
@@ -37,15 +41,16 @@ const GuestNav = () => {
                 <li className={navStyles.webNav}><Link href='mailto:support@cheapestessay.com'><a className={navStyles.externalLink}>Email: support@cheapestessay.com</a></Link></li>
                 <li className={navStyles.webNav}><Link href='https://api.whatsapp.com/send?phone=19094411414'><a className={navStyles.externalLink}>WhatsApp: +1 (909) 441-1414</a></Link></li>
                 <li className={navStyles.fillSpace}></li>
-                {!!user_token?
-                <li><Link href='/dashboard'><a className={`${navStyles.loginBtn} ${navStyles.navBtn} hvr-grow`}>Dashboard</a></Link></li>:
-                <>
-                <li><Link href='/login'><a className={`${navStyles.loginBtn} ${navStyles.navBtn} hvr-grow`}>Login</a></Link></li>
-                <li><Link href='/register'><a className={`${navStyles.registerBtn} ${navStyles.navBtn} hvr-grow`}>Register</a></Link></li>
+                <li>
+                    {!!user_token?
+                    <Link href='/dashboard'><a className={`${navStyles.loginBtn} ${navStyles.navBtn} hvr-grow`}>Dashboard</a></Link>
+                    :
+                    <Link href='/login'><a className={`${navStyles.loginBtn} ${navStyles.navBtn} hvr-grow`}>Login</a></Link>
+                    }
+                </li>
+                <li style={!!user_token?{display:'none'}:{display:'inline'}}><Link href='/register'><a className={`${navStyles.registerBtn} ${navStyles.navBtn} hvr-grow`}>Register</a></Link></li>
                 </>
-                }
-                </>
-                :''}
+                :null}
             </ul>
         </nav>
 
