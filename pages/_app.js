@@ -4,29 +4,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, } from 'react';
 import { useRouter } from 'next/dist/client/router';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, data }) {
 
   // AUTH GUARD
   // prevent users from accessing prohibited page 
   const router = useRouter();
   useEffect(() => {
-      function authGuard() {
-        if (!router.isReady) return;
-
-        const protectedPage = ['/dashboard'];
-        const userEntryPage = ['/login', '/register', '/forgot'];
-        const user_token = typeof window !== 'undefined' ? localStorage.getItem('user_token') : null;
-        if (!!user_token) {
-          if (userEntryPage.includes(router.pathname)) {
-              router.push('/404')
-          }
-        } else {
-            if (protectedPage.includes(router.pathname)) {
-                router.push('/404')
-            }
-        }
+    if (!router.isReady) return;
+    const protectedPage = ['/dashboard'];
+    const userEntryPage = ['/login', '/register', '/forgot'];
+    const user_token = typeof window !== 'undefined' ? localStorage.getItem('user_token') : null;
+    if (!!user_token) {
+      if (userEntryPage.includes(router.pathname)) {
+          router.push('/404')
       }
-      authGuard() // eslint-disable-line react-hooks/exhaustive-deps
+    } else {
+        if (protectedPage.includes(router.pathname)) {
+            router.push('/404')
+        }
+    }
   }, [])
 
   return (
