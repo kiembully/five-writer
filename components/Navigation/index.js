@@ -1,7 +1,7 @@
 import { useRouter } from "next/dist/client/router";
 import GuestNav from "./GuestNav";
 import ProfileNav from "./ProfileNav";
-import DashboardNav from "./DashBoardNav";
+import DashboardNav from "./DashboardNav";
 
 const Navigation = () => {
     const router = useRouter();
