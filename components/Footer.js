@@ -9,14 +9,10 @@ const Footer = () => {
     return (
         <>
         <div className={footerStyles.footerWrap}>
-            {!!user_token?
-            <p>Copyright © 2021 5writer.com . All rights reserved.</p>
-            :
-            <></>
-            }
             <p>Copyright © 2021 5writer.com . All rights reserved.</p>
             {!!user_token?
             <>
+            <Link href='mailto:support@cheapestessay.com'><a>Email: support@cheapestessay.com</a></Link>
             <Link href='https://api.whatsapp.com/send?phone=19094411414'><a>WhatsApp: +1 (909) 441-1414</a></Link>
             <span><Image src={payoneer} width={103} height={20} alt='Payoneer Logo' /></span>
             </>
