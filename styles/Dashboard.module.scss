@@ -5,14 +5,14 @@
     border: 1px solid #96AABE;
     border-radius: 10px;
     background: #FBFDFF;
-    padding: 20px 10px;
+    padding: 20px 10px 0 10px;
     .orderFilter {
         display: flex;
         >span {
             flex: auto;
             display: flex;
         }
-        >span:first-child {
+        >.spnWebFilter {
             button {
                 flex: auto;
                 font-size: 14px;
@@ -43,10 +43,10 @@
                 }
             }
         }
-        >span:nth-child(2) {
+        >.spnFlexSplit {
             padding: 10px;
         }
-        >span:last-child {
+        >.spnSearchWrap {
             border: 1px solid #96AABE;
             border-radius: 5px;
             > {
@@ -69,6 +69,17 @@
                 }
             }
         }
+        .spnMobFilter {
+            display: none;
+            .fcSelectFilter {
+                width: 100%;
+                outline: none;
+                border: 0;
+                font-size: 14px;
+                line-height: 18px;
+                color: $black-color;
+            }
+        }
     }
     .tblContainer {
         margin-top: 20px;
@@ -77,6 +88,12 @@
         tr {
             td, th {
                 border: none;
+                padding: 10px 0;
+            }
+        }
+        thead {
+            tr {
+                background-color: #F6F8FC;
             }
         }
         .tblCell {
@@ -87,6 +104,44 @@
             font-weight: 600;
             &.orderId {
                 color: $theme-color;
+            }
+            .h3emptyList {
+                text-align: center;
+                color: #53606D;
+                font-family: $font-family;
+                font-size: 12px;
+                line-height: 20px;
+                font-weight: 600;
+            }
+        }
+        .tpOrders {
+            p {
+                margin: 0;
+                color: #53606D;
+                font-family: $font-family;
+                font-size: 12px;
+                line-height: 20px;
+                font-weight: 600;
+            }
+            select {
+                color: #53606D;
+                font-family: $font-family;
+                font-size: 12px;
+                line-height: 20px;
+                font-weight: 600;
+            }
+        }
+    }
+}
+// responsive start 
+@media screen and (max-width: 768px) {
+    .dashboardWrap {
+        .orderFilter {
+            .spnMobFilter {
+                display: flex;
+            }
+            .spnWebFilter {
+                display: none;
             }
         }
     }

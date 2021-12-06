@@ -2,14 +2,21 @@
 
 .footerWrap {
     margin: 1rem auto 2rem auto;
-    display: block;
+    display: flex;
+    max-width: 1200px;
     width: 100%;
     text-align: center;
-    p {
+    flex-flow: wrap;
+    p, a, span {
         color: #96AABE;
         font-size: 14px;
         line-height: 18px;
         font-family: $font-family;
+        flex: auto;
+        text-decoration: none;
+        align-items: center;
+        margin: auto;
+        padding: 5px 15px;
     }
 }
 

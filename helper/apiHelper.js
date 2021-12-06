@@ -1,10 +1,17 @@
 import axios from "axios";
+import { useRouter } from "next/dist/client/router";
 
 let url = "https://86olsy8spl.execute-api.us-east-2.amazonaws.com/dev/";
 let live = "https://web.5writer.com/"
 
 export const apiHelper = (api, method, data, headers) => {
-    const apiUrl = url + api;
+    const apiUrl = live + api;
+
+    function logout() {
+        localStorage.clear();
+        window.location.href = '/login'
+    }
+    
     return new Promise((resolve, reject) => {
         axios({
             method: method,
@@ -15,7 +22,7 @@ export const apiHelper = (api, method, data, headers) => {
             .then(res => resolve(res))
             .catch(error => {
                 if (error.response && error.response.status === 401) {
-                    Router.push('/login');
+                    logout()
                 } else {
                     reject(error);
                 }

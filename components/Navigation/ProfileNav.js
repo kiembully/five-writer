@@ -27,7 +27,7 @@ const ProfileNav = ({ownersList}) => {
     const [balance, set_balance] = useState();
     const logoutUser = () => {
         handleClose();
-        // localStorage.clear();
+        localStorage.clear();
         router.push('/')
     }
     

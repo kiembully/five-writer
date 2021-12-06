@@ -31,8 +31,8 @@ const Layout = ({children, pageMeta}) => {
                 <main className={layoutStyles.main}>
                     {children}
                 </main>
+                <Footer />
             </div>
-            <Footer />
         </>
     );
 }
