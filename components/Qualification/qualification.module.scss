@@ -1,0 +1,162 @@
+@import '../../styles/variable.scss';
+
+.qualificationStepperWrap {
+    width: 100%;
+    max-width: 830px;
+    margin: 0 auto;
+    .stepperWrap {
+        > div {
+            flex: auto;
+            .stepLoc {
+                display: inline-block;
+                white-space: nowrap;
+                span > span {
+                    margin-top: 0;
+                }
+                .css-qivjh0-MuiStepLabel-label.MuiStepLabel-alternativeLabel {
+                    margin-top: 0 !important;
+                }
+                .stepLbl {
+                    font-family: $font-family;
+                    font-size: 16px;
+                    line-height: 28px;
+                    text-decoration: none;
+                    &:disabled {
+                        cursor: default;
+                    }
+                }
+            }
+        }
+    }
+    .pPitch {
+        text-align: center;
+        color: $text-color;
+        font-family: $font-family;
+        font-size: 16px;
+        line-height: 28px;
+        font-weight: 300;
+        max-width: 745px;
+        margin: 30px auto;
+        span {
+            color: $black-color
+        }
+    }
+    .qualiChildWrap {
+        max-width: 600px;
+        margin: auto;
+        display: block;
+        background-color: $white-color;
+        box-shadow: 0px 0px 15px $text-color;
+        border-radius: 15px;
+        padding: 25px;
+    }
+
+    // mobile design 
+    .mobStepLoc {
+        display: none;
+        font-family: $font-family;
+        font-size: 16px;
+        line-height: 28px;
+        color: $text-color;
+        span:nth-child(2) {
+            flex: auto;
+        }
+        span:last-child {
+            color: #2CBEFF
+        }
+    }
+    .mobileStepperWrap {
+        display: none;
+        box-shadow: 0px 0px 15px $text-color;
+        width: 100%;
+        position:fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: $white-color;
+        z-index: 1;
+    }
+
+
+    // Forms styles
+    .frmWriterInfo {
+        .telInput {
+            width:100% !important;
+            color: $black-color;
+        }
+        .submitWrap {
+            display: flex;
+            > span {
+                flex: auto;
+            }
+            button {
+                font-family: $font-family;
+                font-size: 16px;
+                line-height: 18px;
+                color: $white-color;
+                background-color: $theme-color;
+                padding: 10px 30px;
+                &.btnPrev {
+                    background-color: $white-color;
+                    border: none;
+                    box-shadow: none;
+                    color: $black-color;
+                }
+            }
+        }
+        .lblWriter {
+            color: $black-color;
+            font-family: $font-family;
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: 600;
+        }
+        .bgGender {
+            max-width: 240px;
+            button {
+                background-color: $white-color;
+                border: 1px solid $text-color;
+                font-family: $font-family;
+                font-size: 16px;
+                line-height: 18px;
+                color: $text-color;
+                outline: none;
+                &:focus {
+                    outline: none;
+                    box-shadow: none;
+                }
+                &.active {
+                    background-color: $theme-color;
+                    color: $white-color;
+                    border: 1px solid $theme-color;
+                }
+            }
+        }
+    }
+    
+}
+
+// reponsive starts 
+@media screen and (max-width: 768px) {
+    .qualificationStepperWrap {
+        .stepperWrap {
+            display: none;
+        }
+        .mobStepLoc,
+        .mobileStepperWrap {
+            display: flex;
+        }
+    }
+}
+@media screen and (max-width: 576px) {
+    .qualificationStepperWrap {
+        .frmWriterInfo{
+            .bgGender {
+                max-width: 100%
+            }
+            .row {
+                display: block;
+            }
+        }
+    }
+}

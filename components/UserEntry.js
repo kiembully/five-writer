@@ -214,7 +214,7 @@ const UserEntry = (props) => {
 
                         <Form noValidate validated={validated} onSubmit={handleSubmit}>
                         {router.pathname == '/register' ? 
-                        <Row className="mb-3">
+                        <Row className="mb-2">
                             <Form.Group as={Col} controlId="formGridFirstName">
                             <Form.Label className={loginStyles.frmLabel}>First Name</Form.Label>
                             <Form.Control 
@@ -241,7 +241,7 @@ const UserEntry = (props) => {
                         </Row>
                         : ''
                         }
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Group className="mb-2" controlId="formBasicEmail">
                             <Form.Label className={loginStyles.frmLabel}>Email address</Form.Label>
                             <Form.Control 
                             type="email" 
@@ -254,7 +254,7 @@ const UserEntry = (props) => {
                             <Form.Control.Feedback className={loginStyles.errors} type="invalid">Invalid Email!</Form.Control.Feedback>
                         </Form.Group>
                         {router.pathname != '/forgot'?
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Group className="mb-2" controlId="formBasicPassword">
                             <Form.Label className={loginStyles.frmLabel}>Password</Form.Label>
                             <Form.Control 
                             type="password" 
@@ -270,7 +270,7 @@ const UserEntry = (props) => {
                         :''}
                         {router.pathname=='/register'?
                         <>
-                        <Form.Group className="mb-3" controlId="formBasicTelephone">
+                        <Form.Group className="mb-2" controlId="formBasicTelephone">
                             <Form.Label className={loginStyles.frmLabel}>Mobile Number</Form.Label>
                             <PhoneInput
                             inputClass={loginStyles.telInput}
@@ -284,7 +284,7 @@ const UserEntry = (props) => {
                             />
                             <Form.Control.Feedback className={loginStyles.errors} type="invalid" style={telError?{display:'none'}:{display:'block'}}>Invalid mobile number!</Form.Control.Feedback>
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicTelephone">
+                        <Form.Group className="mb-2" controlId="formBasicTelephone">
                             <Form.Label className={loginStyles.frmLabel}>Upload your CV</Form.Label>
                             <section className={loginStyles.secUpload}>
                             <div className={loginStyles.dropzone} {...getRootProps()} style={files.length>0?{border: '3px dashed #2CBEFF'}:{border: '3px dashed #96AABE'}}>
@@ -310,7 +310,7 @@ const UserEntry = (props) => {
                         </>
                         :''}
                         {!!props.checkBox ?
-                        <Form.Group className="mb-3" controlId="formBasicCheckbox" >
+                        <Form.Group className="mb-2" controlId="formBasicCheckbox" >
                             <Row className={loginStyles.rowWrap}>
                                 <Col sm>
                                     <Form.Check 
@@ -345,7 +345,7 @@ const UserEntry = (props) => {
                                 {apiLoader?<Spinner animation="border" variant="light" size="sm" />:props.btnText}
                             </button>
                         </div>
-                        <Form.Group className="mb-3" controlId="formBasicOptions">
+                        <Form.Group className="mb-2" controlId="formBasicOptions">
                             <Form.Text className={`${loginStyles.spnLabelWrap} text-muted`}>
                                     <span className={loginStyles.spnLabel}>{props.optionText} </span>
                                     <Link href={props.optionDestination}><a className={loginStyles.createAccountLink}>{props.optionAction}</a></Link>
@@ -370,7 +370,7 @@ const UserEntry = (props) => {
             </Modal.Header>
             <Modal.Body>
                 <Form noValidate validated={forgotValidated} onSubmit={submitNewPasswordHandler}>
-                    <Form.Group className="mb-3" controlId="formForgotPassword">
+                    <Form.Group className="mb-2" controlId="formForgotPassword">
                         <Form.Label className={loginStyles.forgotLabel}>Password</Form.Label>
                         <Form.Control 
                         type="password" 
@@ -383,7 +383,7 @@ const UserEntry = (props) => {
                         />
                         <Form.Control.Feedback className={loginStyles.errors} type="invalid">Invalid Password!</Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formSecurityCode">
+                    <Form.Group className="mb-2" controlId="formSecurityCode">
                         <Form.Label className={loginStyles.forgotLabel}>Security Code</Form.Label>
                         <Form.Control 
                         type="text" 
