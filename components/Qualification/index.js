@@ -5,12 +5,11 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
-// import { useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import MobileStepper from '@mui/material/MobileStepper';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import { useTheme } from '@emotion/react';
 
 // styles 
 import qualiStyles from './qualification.module.scss'
@@ -125,7 +124,7 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-const index = (props) => {
+const Qualification = (props) => {
     // theme 
     const theme = useTheme();
     // stepper 
@@ -215,4 +214,4 @@ const index = (props) => {
     );
 }
 
-export default index;
+export default Qualification;
