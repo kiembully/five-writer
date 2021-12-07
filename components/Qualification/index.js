@@ -158,7 +158,7 @@ const Qualification = (props) => {
             <span>{steps[activeStep]}</span>
         </div>
 
-        <p className={qualiStyles.pPitch}>If you don't know your writer ID with Cheapest Essay then ask our support to give you your writer ID! Remember that writer ID start with WhatsApp support +1 (909) 441-1414 <span>( * Required )</span></p>
+        <p className={qualiStyles.pPitch}>If you don&apos;t know your writer ID with Cheapest Essay then ask our support to give you your writer ID! Remember that writer ID start with WhatsApp support +1 (909) 441-1414 <span>( * Required )</span></p>
 
         <TabPanel value={activeStep} index={0}>
             <WriterInformation 
