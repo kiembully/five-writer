@@ -36,7 +36,7 @@ const MoreInformation = (props) => {
                     <Form.Control.Feedback type="invalid" style={true?{display:'none'}:{display:'block'}}>Invalid</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="mb-2" controlId="question_4">
-                <Form.Label className={qualiStyles.lblWriter}>What's Your available time?</Form.Label>
+                <Form.Label className={qualiStyles.lblWriter}>What&apos;s Your available time?</Form.Label>
                     <Form.Select aria-label="select time" placeholder="Choose your available time">
                         <option value="0">Option 1</option>
                         <option value="1">Option 2</option>

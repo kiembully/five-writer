@@ -103,8 +103,6 @@ const Dashboard = (data) => {
     const [orderMessage, setOrderMessage] = useState();
     useEffect(() => {
       // available,current,bid,revision,completed,cancelled
-      setFilterValue('available');
-      setSelectFilter('available');
       setOrders('available');
     }, [])
     // search filters 
