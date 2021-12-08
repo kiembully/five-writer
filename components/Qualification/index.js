@@ -131,7 +131,6 @@ const Qualification = (props) => {
     const [activeStep, setActiveStep] = useState(0);
     const handleChangeStep = (event, newValue) => {
         setActiveStep(newValue);
-        console.log(newValue)
     };
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -142,6 +141,7 @@ const Qualification = (props) => {
     
     return (
         <div>
+          {console.log(props.countries)}
         <Stepper alternativeLabel activeStep={activeStep} connector={<QontoConnector />} className={qualiStyles.stepperWrap}>
             {steps.map((label, index) => (
             <Step key={label}>

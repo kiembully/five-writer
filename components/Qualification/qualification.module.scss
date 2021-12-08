@@ -134,6 +134,37 @@
         }
     }
     
+    // skeleton 
+    .stepWrapSkel {
+        display: flex;
+        height: 20px;
+        > span {
+            flex:auto;
+            padding: 0 10px;
+            caption {
+                display: block;
+                .circularSkel {
+                    height: 10px;
+                    width: 10px;
+                }
+                .captionSkel {
+                    height: 20px;
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .pitchSkel {
+        max-width: 745px;
+        margin: 30px auto;
+    }
+    .formWrapSkel {
+        margin: 0 auto;
+        max-width: 600px;
+        .formSkel {
+            width: 100%;
+        }
+    }
 }
 
 // reponsive starts 

@@ -49,7 +49,7 @@ const MoreInformation = (props) => {
                     <div className={qualiStyles.submitWrap}>
                         <span></span>
                         <Button className={qualiStyles.btnPrev} onClick={props.buttonPrev}>Back</Button>
-                        <Button onClick={props.buttonNext}>Submit</Button>
+                        <Button onClick={props.buttonNext}>Next</Button>
                     </div>
                 </Row>
             </Form>

@@ -76,7 +76,7 @@ const WriterInformation = (props) => {
                     <Form.Group as={Col} className="mb-2" controlId="formCoutry">
                     <Form.Label className={qualiStyles.lblWriter}>Country</Form.Label>
                     <Form.Select aria-label="select country" placeholder="Select Country">
-                    {props.countries.map((list, index) => (
+                    {props.countries?.map((list, index) => (
                         <option key={index} value={list.name}>{list.name}</option>
                     ))}
                     </Form.Select>
@@ -125,7 +125,7 @@ const WriterInformation = (props) => {
                 <Row>
                     <div className={qualiStyles.submitWrap}>
                         <span></span>
-                        <Button onClick={props.buttonNext}>Submit</Button>
+                        <Button onClick={props.buttonNext}>Next</Button>
                     </div>
                 </Row>
             </Form>

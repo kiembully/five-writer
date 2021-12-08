@@ -152,7 +152,7 @@ const ProfileNav = ({ownersList}) => {
                                 </Link>
                             </li>
                             <li className={navStyles.mMenu}><Link href='/dashboard'><a onClick={handleClose} className={router.pathname == '/dashboard' ? navStyles.active : ''}>Dashboard</a></Link></li>
-                            <li className={navStyles.mMenu}><Link href='/qualifications'><a onClick={handleClose} className={router.pathname == '/qualifications' ? navStyles.active : ''}>Qualifications</a></Link></li>
+                            <li className={navStyles.mMenu}><Link href='/qualifications' prefetch={true}><a onClick={handleClose} className={router.pathname == '/qualifications' ? navStyles.active : ''}>Qualifications</a></Link></li>
                             <li className={navStyles.mMenu}><Link href='/information-test'><a onClick={handleClose} className={router.pathname == '/information-test' ? navStyles.active : ''}>Information Test</a></Link></li>
                             <li className={navStyles.mMenu}><Link href='/essay-test'><a onClick={handleClose} className={router.pathname == '/essay-test' ? navStyles.active : ''}>Essay Test</a></Link></li>
                             <li className={navStyles.mMenu}><Link href='/my-specialization'><a onClick={handleClose} className={router.pathname == '/my-specialization' ? navStyles.active : ''}>My Specialization</a></Link></li>
