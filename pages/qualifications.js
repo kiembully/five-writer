@@ -6,7 +6,7 @@ import qualiStyles from '../components/Qualification/qualification.module.scss';
 import Skeleton from '@mui/material/Skeleton';
 
 const qualifications = (props) => {
-    const [apiLoader, setApiLoader] = useState(true);
+    // const [apiLoader, setApiLoader] = useState(true);
     
     return (
         <div className={qualiStyles.qualificationStepperWrap}>
