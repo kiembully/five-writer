@@ -5,9 +5,11 @@ import { Form, Row, Col, Spinner, Modal, Button, ButtonGroup } from 'react-boots
 // phone input 
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css'; 
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 
 const WriterInformation = (props) => {
+    
     const [validate, setValidate] = useState();
     const [writerID, setWriterID] = useState();
     const [firstName, setFirstName] = useState();
@@ -21,7 +23,7 @@ const WriterInformation = (props) => {
     const [altEmail, setAltEmail] = useState();
     const [whatsApp, setWhatsApp] = useState();
     const [payPal, setPayPal] = useState();
-    
+
     return (
         <div className={qualiStyles.qualiChildWrap}>
 
@@ -76,7 +78,7 @@ const WriterInformation = (props) => {
                     <Form.Group as={Col} className="mb-2" controlId="formCoutry">
                     <Form.Label className={qualiStyles.lblWriter}>Country</Form.Label>
                     <Form.Select aria-label="select country" placeholder="Select Country">
-                    {props.countries?.map((list, index) => (
+                    {props.countries.map((list, index) => (
                         <option key={index} value={list.name}>{list.name}</option>
                     ))}
                     </Form.Select>
@@ -131,6 +133,7 @@ const WriterInformation = (props) => {
             </Form>
             
         </div>
+        
     );
 }
 

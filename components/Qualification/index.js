@@ -10,10 +10,11 @@ import MobileStepper from '@mui/material/MobileStepper';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import Skeleton from '@mui/material/Skeleton';
 
 // styles 
 import qualiStyles from './qualification.module.scss'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // loadComponents 
 import WriterInformation from './WriterInformation';
@@ -21,6 +22,8 @@ import MoreInformation from './MoreInformation';
 import FillQualification from './FillQualification';
 import RateYourself from './RateYourself';
 
+// api helper 
+import { externalApiHelper } from '../../helper/apiHelper';
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -124,7 +127,13 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-const Qualification = (props) => {
+const Qualification = () => {
+    useEffect(() => {
+      setCountryList()
+    }, [])
+    const [apiLoader, setApiLoader] = useState(true);
+    const [countries, setCountries] = useState();
+  
     // theme 
     const theme = useTheme();
     // stepper 
@@ -138,10 +147,20 @@ const Qualification = (props) => {
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
+
+    const mockArr = [0,1,2,3,4,5,6,7,8,9]
+    function setCountryList() {
+        externalApiHelper("https://restcountries.com/v2/all/", "GET", null, null)
+        .then((res) => {
+            const response = res.data;
+            setCountries(response);
+            setApiLoader(false);
+        })
+        .catch((error) => console.error(`Error: ${error}`));
+    }
     
     return (
         <div>
-          {console.log(props.countries)}
         <Stepper alternativeLabel activeStep={activeStep} connector={<QontoConnector />} className={qualiStyles.stepperWrap}>
             {steps.map((label, index) => (
             <Step key={label}>
@@ -161,11 +180,22 @@ const Qualification = (props) => {
         <p className={qualiStyles.pPitch}>If you don&apos;t know your writer ID with Cheapest Essay then ask our support to give you your writer ID! Remember that writer ID start with WhatsApp support +1 (909) 441-1414 <span>( * Required )</span></p>
 
         <TabPanel value={activeStep} index={0}>
+            {apiLoader?
+            <div className={qualiStyles.qualiChildWrap}>
+            {mockArr.map((el) => (
+                  <div className={qualiStyles.formWrapSkel} key={el}>
+                      <h6><Skeleton className={qualiStyles.formSkel} width={50} /></h6>
+                      <h3><Skeleton className={qualiStyles.formSkel} /></h3>
+                  </div>
+              ))}
+          </div>
+            :
             <WriterInformation 
-            countries={props.countries} 
+            countries={countries}
             buttonNext={handleNext}
             buttonPrev={handleBack}
             />
+            }
         </TabPanel>
         <TabPanel value={activeStep} index={1}>
             <MoreInformation 
@@ -174,7 +204,10 @@ const Qualification = (props) => {
             />
         </TabPanel>
         <TabPanel value={activeStep} index={2}>
-            <FillQualification />
+            <FillQualification 
+            buttonNext={handleNext}
+            buttonPrev={handleBack}
+            />
         </TabPanel>
         <TabPanel value={activeStep} index={3}>
             <RateYourself />

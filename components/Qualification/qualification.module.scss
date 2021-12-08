@@ -95,6 +95,7 @@
                 line-height: 18px;
                 color: $white-color;
                 background-color: $theme-color;
+                border: none;
                 padding: 10px 30px;
                 &.btnPrev {
                     background-color: $white-color;
@@ -132,38 +133,41 @@
                 }
             }
         }
-    }
-    
-    // skeleton 
-    .stepWrapSkel {
-        display: flex;
-        height: 20px;
-        > span {
-            flex:auto;
-            padding: 0 10px;
-            caption {
-                display: block;
-                .circularSkel {
-                    height: 10px;
-                    width: 10px;
-                }
-                .captionSkel {
-                    height: 20px;
-                    width: 100%;
+        .fclRadio {
+            color: $black-color;
+            font-family: $font-family;
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: 600;
+        }
+        .lblChipWrap {
+            color: $text-color;
+            font-family: $font-family;
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: 600;
+        }
+        .chipSelectPapers {
+            width: 100%;
+            .chipSelectWrap {
+                display: flex;
+                flex-wrap: wrap;
+                .chipPaper {
+                    color: $black-color;
+                    font-family: $font-family;
+                    font-size: 14px;
+                    line-height: 18px;
+                    font-weight: 400;
+                    margin-right: 5px;
+                    margin-bottom: 5px;
                 }
             }
         }
     }
-    .pitchSkel {
-        max-width: 745px;
-        margin: 30px auto;
-    }
+    
+    // skeleton 
     .formWrapSkel {
-        margin: 0 auto;
-        max-width: 600px;
-        .formSkel {
-            width: 100%;
-        }
+        margin: 0 auto 30px auto;
     }
 }
 
