@@ -17,10 +17,10 @@ import panelStyles from '../../styles/ProfilePanels.module.scss'
 import { useEffect, useState } from 'react';
 
 // loadComponents 
-import WriterInformation from './WriterInformation';
-import MoreInformation from './MoreInformation';
-import FillQualification from './FillQualification';
-import RateYourself from './RateYourself';
+import ApaFormat from './ApaFormat';
+import ChicagoTurabianFormat from './ChicagoTurabianFormat';
+import Plagiarism from './Plagiarism';
+import Grammar from './Grammar';
 
 // api helper 
 import { externalApiHelper } from '../../helper/apiHelper';
@@ -98,7 +98,7 @@ QontoStepIcon.propTypes = {
   completed: PropTypes.bool,
 };
 
-const steps = ['1. Writer Information', '2. More Information', '3. Your Qualification', '4. Rate your self'];
+const steps = ['1. APA Formatting test', '2. Chicago/Turabian format Test', '3. Test: Plagiarism Quiz', '4. Grammar Quiz'];
 
 // tabs 
 function TabPanel(props) {
@@ -127,7 +127,7 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-const Qualification = () => {
+const InformationTest = () => {
     useEffect(() => {
       setCountryList();
     }, [])
@@ -143,11 +143,11 @@ const Qualification = () => {
         setActiveStep(newValue);
     };
     const handleNext = () => {
-        localStorage.setItem('qualification_step', (activeStep + 1));
+        localStorage.setItem('information_step', (activeStep + 1));
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
     const handleBack = () => {
-        localStorage.setItem('qualification_step', (activeStep +-1));
+        localStorage.setItem('information_step', (activeStep +-1));
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
@@ -155,8 +155,8 @@ const Qualification = () => {
     function setCountryList() {
 
       // retain active tabs when page reloads 
-      const qualification_step = typeof window !== 'undefined' ? localStorage.getItem('qualification_step') : null;
-      setActiveStep(!!qualification_step ? parseInt(qualification_step) : 0)
+      const information_step = typeof window !== 'undefined' ? localStorage.getItem('information_step') : null;
+      setActiveStep(!!information_step ? parseInt(information_step) : 0)
         
         // set country lists 
         externalApiHelper("https://restcountries.com/v2/all/", "GET", null, null)
@@ -167,9 +167,9 @@ const Qualification = () => {
         })
         .catch((error) => console.error(`Error: ${error}`));
     }
-    
+
     return (
-        <div>
+       <div>
         <Stepper alternativeLabel activeStep={activeStep} connector={<QontoConnector />} className={panelStyles.stepperWrap}>
             {steps.map((label, index) => (
             <Step key={label}>
@@ -186,7 +186,7 @@ const Qualification = () => {
             <span>{steps[activeStep]}</span>
         </div>
 
-        <p className={panelStyles.pPitch}>If you don&apos;t know your writer ID with Cheapest Essay then ask our support to give you your writer ID! Remember that writer ID start with WhatsApp support +1 (909) 441-1414 <span>( * Required )</span></p>
+        <p className={panelStyles.pPitch}>Make sure that your writer ID start with W. IF YOU not sure with your writer ID then ask our support. WhatsApp: +1 (909) 441-1414</p>
 
         <TabPanel value={activeStep} index={0}>
             {apiLoader?
@@ -199,26 +199,25 @@ const Qualification = () => {
               ))}
           </div>
             :
-            <WriterInformation 
-            countries={countries}
+            <ApaFormat 
             buttonNext={handleNext}
             />
             }
         </TabPanel>
         <TabPanel value={activeStep} index={1}>
-            <MoreInformation 
+            <ChicagoTurabianFormat 
             buttonNext={handleNext}
             buttonPrev={handleBack}
             />
         </TabPanel>
         <TabPanel value={activeStep} index={2}>
-            <FillQualification 
+            <Plagiarism 
             buttonNext={handleNext}
             buttonPrev={handleBack}
             />
         </TabPanel>
         <TabPanel value={activeStep} index={3}>
-            <RateYourself 
+            <Grammar 
             buttonPrev={handleBack}
             />
         </TabPanel>
@@ -257,4 +256,4 @@ const Qualification = () => {
     );
 }
 
-export default Qualification;
+export default InformationTest;

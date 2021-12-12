@@ -1,5 +1,5 @@
 // styles
-import qualiStyles from './qualification.module.scss';
+import panelStyles from '../../styles/ProfilePanels.module.scss'
 // react bootstrap 
 import { Form, Row, Col, Spinner, Modal, Button, ButtonGroup } from 'react-bootstrap';
 // phone input 
@@ -25,13 +25,14 @@ const WriterInformation = (props) => {
     const [payPal, setPayPal] = useState();
 
     return (
-        <div className={qualiStyles.qualiChildWrap}>
+        <div className={panelStyles.qualiChildWrap}>
 
-            <Form noValidate className={qualiStyles.frmWriterInfo}>
+            <Form noValidate className={panelStyles.frmPanelWrap}>
                 <Row className="mb-2">
                 <Form.Group className="mb-2" controlId="formWriterId">
-                    <Form.Label className={qualiStyles.lblWriter}>Writer ID</Form.Label>
+                    <Form.Label className={panelStyles.lblWriter}>Writer ID</Form.Label>
                     <Form.Control 
+                    className={panelStyles.fcInputs}
                     type="text" 
                     placeholder="writer ID" 
                     />
@@ -40,16 +41,18 @@ const WriterInformation = (props) => {
                 </Row>
                 <Row className="mb-2">
                     <Form.Group as={Col} controlId="formFirstName">
-                    <Form.Label className={qualiStyles.lblWriter}>First Name</Form.Label>
+                    <Form.Label className={panelStyles.lblWriter}>First Name</Form.Label>
                     <Form.Control 
+                    className={panelStyles.fcInputs}
                     type="text" 
                     placeholder="First Name" 
                     />
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formLastName">
-                    <Form.Label className={qualiStyles.lblWriter}>Last Name</Form.Label>
+                    <Form.Label className={panelStyles.lblWriter}>Last Name</Form.Label>
                     <Form.Control 
+                    className={panelStyles.fcInputs}
                     type="text" 
                     placeholder="Last Name" 
                     />
@@ -58,9 +61,9 @@ const WriterInformation = (props) => {
                 </Row>
                 <Row className="mb-2">
                     <Form.Group className="mb-2" controlId="formTelephone">
-                        <Form.Label className={qualiStyles.lblWriter}>Mobile Number</Form.Label>
+                        <Form.Label className={panelStyles.lblWriter}>Mobile Number</Form.Label>
                         <PhoneInput
-                        inputClass={qualiStyles.telInput}
+                        inputClass={panelStyles.telInput}
                         placeholder="+x (xxx) xxx-xxxx"
                         country={'us'}
                         />
@@ -68,15 +71,15 @@ const WriterInformation = (props) => {
                     </Form.Group>
                 </Row>
                 <Row className="mb-2">
-                <Form.Label className={qualiStyles.lblWriter}>Gender</Form.Label>
-                <ButtonGroup aria-label="gender select" className={qualiStyles.bgGender}>
+                <Form.Label className={panelStyles.lblWriter}>Gender</Form.Label>
+                <ButtonGroup aria-label="gender select" className={panelStyles.bgGender}>
                     <Button >Male</Button>
                     <Button >Female</Button>
                 </ButtonGroup>
                 </Row>
                 <Row className="mb-2">
                     <Form.Group as={Col} className="mb-2" controlId="formCoutry">
-                    <Form.Label className={qualiStyles.lblWriter}>Country</Form.Label>
+                    <Form.Label className={panelStyles.lblWriter}>Country</Form.Label>
                     <Form.Select aria-label="select country" placeholder="Select Country">
                     {props.countries.map((list, index) => (
                         <option key={index} value={list.name}>{list.name}</option>
@@ -85,33 +88,37 @@ const WriterInformation = (props) => {
                     </Form.Group>
 
                     <Form.Group as={Col} className="mb-2" controlId="formCity">
-                    <Form.Label className={qualiStyles.lblWriter}>State</Form.Label>
-                        <Form.Control type="text" placeholder="Enter City" />
+                    <Form.Label className={panelStyles.lblWriter}>State</Form.Label>
+                        <Form.Control 
+                    className={panelStyles.fcInputs}type="text" placeholder="Enter City" />
                     </Form.Group>
                 </Row>
                 <Row className="mb-2">
                 <Form.Group className="mb-2" controlId="formEmail">
-                    <Form.Label className={qualiStyles.lblWriter}>Email</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
+                    <Form.Label className={panelStyles.lblWriter}>Email</Form.Label>
+                    <Form.Control 
+                    className={panelStyles.fcInputs}type="email" placeholder="Enter email" />
                 </Form.Group>
                 </Row>
                 <Row className="mb-2">
                 <Form.Group className="mb-2" controlId="formRetypeEmail">
-                    <Form.Label className={qualiStyles.lblWriter}>Retype Email</Form.Label>
-                    <Form.Control type="email" placeholder="Retype email" />
+                    <Form.Label className={panelStyles.lblWriter}>Retype Email</Form.Label>
+                    <Form.Control 
+                    className={panelStyles.fcInputs}type="email" placeholder="Retype email" />
                 </Form.Group>
                 </Row>
                 <Row className="mb-2">
                 <Form.Group className="mb-2" controlId="formAltEmail">
-                    <Form.Label className={qualiStyles.lblWriter}>Alternative Email</Form.Label>
-                    <Form.Control type="email" placeholder="Enter alternative email" />
+                    <Form.Label className={panelStyles.lblWriter}>Alternative Email</Form.Label>
+                    <Form.Control 
+                    className={panelStyles.fcInputs}type="email" placeholder="Enter alternative email" />
                 </Form.Group>
                 </Row>
                 <Row className="mb-2">
                     <Form.Group className="mb-2" controlId="formWhatsApp">
-                        <Form.Label className={qualiStyles.lblWriter}>WhatsApp Number</Form.Label>
+                        <Form.Label className={panelStyles.lblWriter}>WhatsApp Number</Form.Label>
                         <PhoneInput
-                        inputClass={qualiStyles.telInput}
+                        inputClass={panelStyles.telInput}
                         placeholder="+x (xxx) xxx-xxxx"
                         country={'us'}
                         />
@@ -120,12 +127,13 @@ const WriterInformation = (props) => {
                 </Row>
                 <Row className="mb-5">
                 <Form.Group className="mb-2" controlId="formPayPal">
-                    <Form.Label className={qualiStyles.lblWriter}>Do you have PayPal? If yes, what is your PayPal email</Form.Label>
-                    <Form.Control type="email" placeholder="Enter Email" />
+                    <Form.Label className={panelStyles.lblWriter}>Do you have PayPal? If yes, what is your PayPal email</Form.Label>
+                    <Form.Control 
+                    className={panelStyles.fcInputs}type="email" placeholder="Enter Email" />
                 </Form.Group>
                 </Row>
                 <Row>
-                    <div className={qualiStyles.submitWrap}>
+                    <div className={panelStyles.submitWrap}>
                         <span></span>
                         <Button onClick={props.buttonNext}>Next</Button>
                     </div>

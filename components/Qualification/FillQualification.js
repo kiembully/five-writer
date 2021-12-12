@@ -6,18 +6,17 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 
 // styles
-import qualiStyles from './qualification.module.scss';
+import panelStyles from '../../styles/ProfilePanels.module.scss'
 // react bootstrap 
 import { Form, Row, Col, Spinner, Modal, Button, ButtonGroup } from 'react-bootstrap';
 
-import {citations,services,acadLevel,papers} from './data';
+import {citations, services, acadLevel,papers, easiestSubject, subjectLabels} from './data';
 import { useTheme } from '@emotion/react';
 import { useState } from 'react';
 
@@ -60,7 +59,7 @@ const BpCheckedIcon = styled(BpIcon)({
     content: '""',
   },
   'input:hover ~ &': {
-    backgroundColor: '#106ba3',
+    backgroundColor: '#009ADF',
   },
 });
 
@@ -84,10 +83,14 @@ function BpRadio(props) {
 
 function getStyles(name, paperType) {
   return {
-    fontWeight:
+    backgroundColor:
       paperType.indexOf(name) === -1
-        ? 400
-        : 600,
+        ? null
+        : '#2CBEFF',
+    color:
+      paperType.indexOf(name) === -1
+        ? '#151515'
+        : '#151515',
   };
 }
 
@@ -104,62 +107,56 @@ const FillQualification = (props) => {
     };
     
     return (
-        <div className={qualiStyles.qualiChildWrap}>
+        <div className={panelStyles.qualiChildWrap}>
             
-            <Form noValidate className={qualiStyles.frmWriterInfo}>
+            <Form noValidate className={panelStyles.frmPanelWrap}>
                 
                 <Row className="mb-2">
                 <Form.Group className="mb-2" controlId="question_1">
-                <Form.Label className={qualiStyles.lblWriter}>What citation styles are you familiar with?</Form.Label>
+                <Form.Label className={panelStyles.lblWriter}>What citation styles are you familiar with?</Form.Label>
                     <RadioGroup defaultValue="" aria-label="citation" name="citation">
                         {citations.map((list, index) => (
-                            <FormControlLabel className={qualiStyles.fclRadio} key={index} value={list.value} control={<BpRadio />} label={list.label} />
+                            <FormControlLabel className={panelStyles.fclRadio} key={index} value={list.value} control={<BpRadio />} label={list.label} />
                         ))}
                     </RadioGroup>
                 </Form.Group>
                 </Row>
                 <Row className="mb-2">
                 <Form.Group className="mb-2" controlId="question_2">
-                <Form.Label className={qualiStyles.lblWriter}>What type of service are you able to do?</Form.Label>
+                <Form.Label className={panelStyles.lblWriter}>What type of service are you able to do?</Form.Label>
                     <RadioGroup defaultValue="" aria-label="type of service" name="type-of-service">
                         {services.map((list, index) => (
-                            <FormControlLabel className={qualiStyles.fclRadio} key={index} value={list.value} control={<BpRadio />} label={list.label} />
+                            <FormControlLabel className={panelStyles.fclRadio} key={index} value={list.value} control={<BpRadio />} label={list.label} />
                         ))}
                     </RadioGroup>
                 </Form.Group>
                 </Row>
                 <Row className="mb-2">
                 <Form.Group className="mb-2" controlId="question_3">
-                <Form.Label className={qualiStyles.lblWriter}>What academic level are you able to do?</Form.Label>
+                <Form.Label className={panelStyles.lblWriter}>What academic level are you able to do?</Form.Label>
                     <RadioGroup defaultValue="" aria-label="academic level" name="academic-level">
                         {acadLevel.map((list, index) => (
-                            <FormControlLabel className={qualiStyles.fclRadio} key={index} value={list.value} control={<BpRadio />} label={list.label} />
+                            <FormControlLabel className={panelStyles.fclRadio} key={index} value={list.value} control={<BpRadio />} label={list.label} />
                         ))}
                     </RadioGroup>
                 </Form.Group>
                 </Row>
                 <Row className="mb-2">
                 <Form.Group className="mb-2" controlId="question_4">
-                <Form.Label className={qualiStyles.lblWriter}>Preferred Type of paper:</Form.Label>
-                    {/* <RadioGroup defaultValue="" aria-label="type of paper" name="type-of-paper">
-                        {papers.map((list, index) => (
-                            <FormControlLabel className={qualiStyles.fclRadio} key={index} value={list.value} control={<BpRadio />} label={list.label} />
-                        ))}
-                    </RadioGroup> */}
-
-                    <InputLabel id="paper types" className={qualiStyles.lblChipWrap}>Papers</InputLabel>
+                <Form.Label className={panelStyles.lblWriter}>Preferred Type of paper:</Form.Label>
                     <Select
-                    className={qualiStyles.chipSelectPapers}
+                    className={panelStyles.chipSelectPapers}
                     labelId="paper types"
                     id="paper_type"
                     multiple
+                    displayEmpty
                     value={paperType}
                     onChange={handleChange}
                     input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
                     renderValue={(selected) => (
-                        <div className={qualiStyles.chipSelectWrap}>
+                        <div className={panelStyles.chipSelectWrap}>
                             {selected.map((value) => (
-                                <Chip className={qualiStyles.chipPaper} key={value} label={value} />
+                                <Chip className={panelStyles.chipPaper} key={value} label={value} />
                             ))}
                         </div>
                     )}
@@ -177,10 +174,22 @@ const FillQualification = (props) => {
                     
                 </Form.Group>
                 </Row>
+                {subjectLabels.map((list, index) => (
+                <Row key={index} className={index > 3 ? 'mb-5' : 'mb-2'}>
+                <Form.Group className="mb-2" controlId={`question_${index}`}>
+                    <Form.Label className={panelStyles.lblWriter}>{list}</Form.Label>
+                    <Form.Select aria-label="select time" placeholder="Choose your available time">
+                        {easiestSubject.map((list, index) => (
+                            <option key={index} value={list.value}>{list.label}</option>
+                        ))}
+                    </Form.Select>
+                </Form.Group>
+                </Row>
+                ))}
                 <Row>
-                    <div className={qualiStyles.submitWrap}>
+                    <div className={panelStyles.submitWrap}>
                         <span></span>
-                        <Button className={qualiStyles.btnPrev} onClick={props.buttonPrev}>Back</Button>
+                        <Button className={panelStyles.btnPrev} onClick={props.buttonPrev}>Back</Button>
                         <Button onClick={props.buttonNext}>Next</Button>
                     </div>
                 </Row>

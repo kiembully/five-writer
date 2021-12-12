@@ -5,7 +5,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 // styles
-import qualiStyles from './qualification.module.scss';
+import panelStyles from '../../styles/ProfilePanels.module.scss'
 // react bootstrap 
 import { Form, Row, Col, Spinner, Modal, Button, ButtonGroup } from 'react-bootstrap';
 
@@ -50,7 +50,7 @@ const BpCheckedIcon = styled(BpIcon)({
     content: '""',
   },
   'input:hover ~ &': {
-    backgroundColor: '#106ba3',
+    backgroundColor: '#009ADF',
   },
 });
 
@@ -75,13 +75,14 @@ function BpRadio(props) {
 const MoreInformation = (props) => {
     
     return (
-        <div className={qualiStyles.qualiChildWrap}>
+        <div className={panelStyles.qualiChildWrap}>
 
-            <Form noValidate className={qualiStyles.frmWriterInfo}>
+            <Form noValidate className={panelStyles.frmPanelWrap}>
                 <Row className="mb-2">
                 <Form.Group className="mb-2" controlId="question_1">
-                    <Form.Label className={qualiStyles.lblWriter}>Have you ever worked for any other online academic assistance companies? if Yes then what is company name?</Form.Label>
+                    <Form.Label className={panelStyles.lblWriter}>Have you ever worked for any other online academic assistance companies? if Yes then what is company name?</Form.Label>
                     <Form.Control 
+                    className={panelStyles.fcInputs}
                     type="text" 
                     placeholder="Your answer" 
                     />
@@ -90,8 +91,9 @@ const MoreInformation = (props) => {
                 </Row>
                 <Row className="mb-2">
                 <Form.Group className="mb-2" controlId="question_2">
-                    <Form.Label className={qualiStyles.lblWriter}>What is your native language?</Form.Label>
+                    <Form.Label className={panelStyles.lblWriter}>What is your native language?</Form.Label>
                     <Form.Control 
+                    className={panelStyles.fcInputs}
                     type="text" 
                     placeholder="Your answer" 
                     />
@@ -100,8 +102,9 @@ const MoreInformation = (props) => {
                 </Row>
                 <Row className="mb-2">
                 <Form.Group className="mb-2" controlId="question_3">
-                    <Form.Label className={qualiStyles.lblWriter}>What is your second language?</Form.Label>
+                    <Form.Label className={panelStyles.lblWriter}>What is your second language?</Form.Label>
                     <Form.Control 
+                    className={panelStyles.fcInputs}
                     type="text" 
                     placeholder="Your answer" 
                     />
@@ -110,7 +113,7 @@ const MoreInformation = (props) => {
                 </Row>
                 <Row className="mb-2">
                 <Form.Group className="mb-2" controlId="question_4">
-                <Form.Label className={qualiStyles.lblWriter}>What&apos;s Your available time?</Form.Label>
+                <Form.Label className={panelStyles.lblWriter}>What&apos;s Your available time?</Form.Label>
                     <Form.Select aria-label="select time" placeholder="Choose your available time" defaultValue="">
                         {workAvailability.map((list, index) => (
                             <option key={index} value={list.value}>{list.label}</option>
@@ -120,28 +123,28 @@ const MoreInformation = (props) => {
                 </Row>
                 <Row className="mb-2">
                 <Form.Group className="mb-2" controlId="question_5">
-                <Form.Label className={qualiStyles.lblWriter}>Your available time in your country?</Form.Label>
+                <Form.Label className={panelStyles.lblWriter}>Your available time in your country?</Form.Label>
                     <RadioGroup defaultValue="" aria-label="gender" name="customized-radios">
                         {timeAvailability.map((list, index) => (
-                            <FormControlLabel className={qualiStyles.fclRadio} key={index} value={list.value} control={<BpRadio />} label={list.label} />
+                            <FormControlLabel className={panelStyles.fclRadio} key={index} value={list.value} control={<BpRadio />} label={list.label} />
                         ))}
                     </RadioGroup>
                 </Form.Group>
                 </Row>
                 <Row className="mb-5">
                 <Form.Group className="mb-2" controlId="question_6">
-                <Form.Label className={qualiStyles.lblWriter}>Educational attainment:</Form.Label>
+                <Form.Label className={panelStyles.lblWriter}>Educational attainment:</Form.Label>
                     <RadioGroup defaultValue="" aria-label="gender" name="customized-radios">
                         {educAttainment.map((list, index) => (
-                            <FormControlLabel className={qualiStyles.fclRadio} key={index} value={list.value} control={<BpRadio />} label={list.label} />
+                            <FormControlLabel className={panelStyles.fclRadio} key={index} value={list.value} control={<BpRadio />} label={list.label} />
                         ))}
                     </RadioGroup>
                 </Form.Group>
                 </Row>
                 <Row>
-                    <div className={qualiStyles.submitWrap}>
+                    <div className={panelStyles.submitWrap}>
                         <span></span>
-                        <Button className={qualiStyles.btnPrev} onClick={props.buttonPrev}>Back</Button>
+                        <Button className={panelStyles.btnPrev} onClick={props.buttonPrev}>Back</Button>
                         <Button onClick={props.buttonNext}>Next</Button>
                     </div>
                 </Row>

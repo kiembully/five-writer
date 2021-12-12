@@ -1,11 +1,11 @@
 import Qualification from '../components/Qualification';
-import qualiStyles from '../components/Qualification/qualification.module.scss';
+import panelStyles from '../styles/ProfilePanels.module.scss'
 
 const qualifications = (props) => {
     
     return (
-        <div className={qualiStyles.qualificationStepperWrap}>
-
+        <div className={panelStyles.profilePanelsWrap}>
+            
             <Qualification />
             
         </div>

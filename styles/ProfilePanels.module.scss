@@ -1,6 +1,6 @@
-@import '../../styles/variable.scss';
+@import '../styles/variable.scss';
 
-.qualificationStepperWrap {
+.profilePanelsWrap {
     width: 100%;
     max-width: 830px;
     margin: 0 auto;
@@ -35,7 +35,7 @@
         font-size: 16px;
         line-height: 28px;
         font-weight: 300;
-        max-width: 745px;
+        max-width: 730px;
         margin: 30px auto;
         span {
             color: $black-color
@@ -79,7 +79,7 @@
 
 
     // Forms styles
-    .frmWriterInfo {
+    .frmPanelWrap {
         .telInput {
             width:100% !important;
             color: $black-color;
@@ -135,10 +135,26 @@
         }
         .fclRadio {
             color: $black-color;
+            >span:last-child {
+                color: $black-color;
+                font-family: $font-family;
+                font-size: 14px;
+                line-height: 18px;
+            }
+        }
+        .fcTextarea,
+        .fcInputs {
+            color: $black-color;
             font-family: $font-family;
             font-size: 14px;
             line-height: 18px;
             font-weight: 600;
+            ::placeholder {
+                color: $text-color
+            }
+        }
+        .fcTextarea {
+            resize: none;
         }
         .lblChipWrap {
             color: $text-color;
@@ -149,6 +165,9 @@
         }
         .chipSelectPapers {
             width: 100%;
+            >div:first-child {
+                min-height: 0;
+            }
             .chipSelectWrap {
                 display: flex;
                 flex-wrap: wrap;
@@ -162,6 +181,37 @@
                     margin-bottom: 5px;
                 }
             }
+            &:hover {
+                outline: none;
+                box-shadow: none;
+            }
+        }
+        .rateWrap {
+            display: flex;
+            max-width: 500px;
+            >span:nth-child(2) {
+                flex: auto;
+                align-self: center;
+                padding: 0 15px;
+                >span {
+                    display: flex;
+                    label {
+                        flex: auto;
+                    }
+                }
+            }
+            >span:first-child,
+            >span:last-child {
+                display: flex;
+                align-self: center;
+                >label {
+                    color: #53606D;
+                    font-family: $font-family;
+                    font-size: 12px;
+                    line-height: 20px;
+                    font-weight: 400;
+                }
+            }
         }
     }
     
@@ -173,7 +223,7 @@
 
 // reponsive starts 
 @media screen and (max-width: 768px) {
-    .qualificationStepperWrap {
+    .profilePanelsWrap {
         .stepperWrap {
             display: none;
         }
@@ -184,8 +234,8 @@
     }
 }
 @media screen and (max-width: 576px) {
-    .qualificationStepperWrap {
-        .frmWriterInfo{
+    .profilePanelsWrap {
+        .frmPanelWrap{
             .bgGender {
                 max-width: 100%
             }
