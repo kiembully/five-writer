@@ -25,6 +25,10 @@ import Grammar from './Grammar';
 // api helper 
 import { externalApiHelper } from '../../helper/apiHelper';
 
+// common dialog 
+import CommonDialog from '../Dialog'
+import TestResponse from '../TestResponse';
+
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
     top: 10,
@@ -133,6 +137,30 @@ const InformationTest = () => {
     }, [])
     const [apiLoader, setApiLoader] = useState(true);
     const [countries, setCountries] = useState();
+    const [filled, setFilled] = useState(false);
+    const handleFrmFilled = () => {
+      setFilled(true)
+    }
+    const handleEdit = () => {
+      localStorage.removeItem('qualification_step');
+      localStorage.removeItem('i_step_done');
+      setActiveStep(0);
+      setFilled(false)
+    }
+
+    // dialog 
+    const [dialogState, setDialogState] = useState(false);
+    const openDialog = () => {
+      setDialogState(true);
+    };
+    const closeDialog = () => {
+      setDialogState(false);
+    };
+    const saveForm = () => {
+      localStorage.setItem('i_step_done', 'true');
+      setDialogState(false);
+      setFilled(true);
+    }
   
     // theme 
     const theme = useTheme();
@@ -157,6 +185,10 @@ const InformationTest = () => {
       // retain active tabs when page reloads 
       const information_step = typeof window !== 'undefined' ? localStorage.getItem('information_step') : null;
       setActiveStep(!!information_step ? parseInt(information_step) : 0)
+
+      // sets response message if form is already filled up
+      const i_step_done = typeof window !== 'undefined' ? localStorage.getItem('i_step_done') : null;
+      setFilled(!!i_step_done);
         
         // set country lists 
         externalApiHelper("https://restcountries.com/v2/all/", "GET", null, null)
@@ -168,7 +200,9 @@ const InformationTest = () => {
         .catch((error) => console.error(`Error: ${error}`));
     }
 
-    return (
+    return filled ? (
+      <TestResponse buttonEdit={handleEdit} />
+    ) : (
        <div>
         <Stepper alternativeLabel activeStep={activeStep} connector={<QontoConnector />} className={panelStyles.stepperWrap}>
             {steps.map((label, index) => (
@@ -219,6 +253,7 @@ const InformationTest = () => {
         <TabPanel value={activeStep} index={3}>
             <Grammar 
             buttonPrev={handleBack}
+            buttonSubmit={openDialog}
             />
         </TabPanel>
 
@@ -252,6 +287,12 @@ const InformationTest = () => {
         }
         />
         
+        <CommonDialog 
+        saveForm={saveForm}
+        closeDia={closeDialog}
+        diaState={dialogState}
+        title="Multiple-choice test"
+        />
         </div>
     );
 }

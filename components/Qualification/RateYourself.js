@@ -165,7 +165,7 @@ const RateYourself = (props) => {
                     <div className={panelStyles.submitWrap}>
                         <span></span>
                         <Button className={panelStyles.btnPrev} onClick={props.buttonPrev}>Back</Button>
-                        <Button>Submit</Button>
+                        <Button onClick={props.buttonSubmit}>Submit</Button>
                     </div>
                 </Row>
                 

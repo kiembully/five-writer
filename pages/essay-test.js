@@ -1,7 +1,10 @@
+import panelStyles from '../styles/ProfilePanels.module.scss';
+import Essay from '../components/Essay';
+
 const EssayTest = () => {
     return (
-        <div>
-            Enter
+        <div className={panelStyles.profilePanelsWrap}>
+            <Essay />
         </div>
     );
 }

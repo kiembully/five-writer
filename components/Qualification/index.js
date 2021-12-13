@@ -21,9 +21,13 @@ import WriterInformation from './WriterInformation';
 import MoreInformation from './MoreInformation';
 import FillQualification from './FillQualification';
 import RateYourself from './RateYourself';
+import TestResponse from '../TestResponse'
 
 // api helper 
 import { externalApiHelper } from '../../helper/apiHelper';
+
+// common dialog 
+import CommonDialog from '../Dialog';
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -133,7 +137,31 @@ const Qualification = () => {
     }, [])
     const [apiLoader, setApiLoader] = useState(true);
     const [countries, setCountries] = useState();
-  
+    const [filled, setFilled] = useState(false);
+    const handleFrmFilled = () => {
+      setFilled(true)
+    }
+    const handleEdit = () => {
+      localStorage.removeItem('qualification_step');
+      localStorage.removeItem('q_step_done');
+      setActiveStep(0);
+      setFilled(false)
+    }
+
+    // dialog 
+    const [dialogState, setDialogState] = useState(false);
+    const openDialog = () => {
+      setDialogState(true);
+    };
+    const closeDialog = () => {
+      setDialogState(false);
+    };
+    const saveForm = () => {
+      localStorage.setItem('q_step_done', 'true');
+      setDialogState(false);
+      setFilled(true);
+    }
+
     // theme 
     const theme = useTheme();
     // stepper 
@@ -157,6 +185,10 @@ const Qualification = () => {
       // retain active tabs when page reloads 
       const qualification_step = typeof window !== 'undefined' ? localStorage.getItem('qualification_step') : null;
       setActiveStep(!!qualification_step ? parseInt(qualification_step) : 0)
+      
+      // sets response message if form is already filled up
+      const q_step_done = typeof window !== 'undefined' ? localStorage.getItem('q_step_done') : null;
+      setFilled(!!q_step_done);
         
         // set country lists 
         externalApiHelper("https://restcountries.com/v2/all/", "GET", null, null)
@@ -168,8 +200,11 @@ const Qualification = () => {
         .catch((error) => console.error(`Error: ${error}`));
     }
     
-    return (
+    return filled ? (
+      <TestResponse buttonEdit={handleEdit} />
+    ) : (
         <div>
+
         <Stepper alternativeLabel activeStep={activeStep} connector={<QontoConnector />} className={panelStyles.stepperWrap}>
             {steps.map((label, index) => (
             <Step key={label}>
@@ -220,6 +255,7 @@ const Qualification = () => {
         <TabPanel value={activeStep} index={3}>
             <RateYourself 
             buttonPrev={handleBack}
+            buttonSubmit={openDialog}
             />
         </TabPanel>
 
@@ -253,6 +289,13 @@ const Qualification = () => {
         }
         />
         
+        <CommonDialog 
+        saveForm={saveForm}
+        closeDia={closeDialog}
+        diaState={dialogState}
+        title="Writer Info"
+        />
+
         </div>
     );
 }
