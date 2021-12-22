@@ -121,7 +121,6 @@ const Dashboard = (data) => {
     };
     const handleTextFilter = (event) => {
       setTextFilter(event.target.value);
-      console.log(myOrders.filter(el => el === event.target.value))
     }
     // pagination 
     const [page, setPage] = useState(0);
@@ -162,7 +161,6 @@ const Dashboard = (data) => {
       .then((res) => {
           setApiLoader(false);
           const response = res.data;
-          console.log(response)
 
           if (response.status) {
             setMyOrders(response.data.orders)
