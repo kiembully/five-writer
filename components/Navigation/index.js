@@ -10,16 +10,12 @@ const Navigation = () => {
         return guestPages.includes(router.pathname)
     }
 
-    return (
-        <>
-        {handleNavigation()?
+    return handleNavigation() ? (
         <GuestNav />
-        :
+    ) : (
         <>
         <ProfileNav />
         <DashboardNav />
-        </>
-        }
         </>
     );
 }

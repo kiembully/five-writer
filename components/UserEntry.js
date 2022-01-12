@@ -13,6 +13,7 @@ import 'react-phone-input-2/lib/style.css'
 import {useDropzone} from 'react-dropzone';
 import imgUpload from '../public/upload_icon.svg'
 import fileUpload from '../public/file_icon.svg'
+import jwt_decode from "jwt-decode";
 
 const UserEntry = (props) => {
     const [validated, setValidated] = useState(false);
@@ -92,7 +93,12 @@ const UserEntry = (props) => {
             const response = res.data;
             if (response.status) {
                 localStorage.setItem('user_token', response.data.user_token);
-                router.push('/dashboard')
+                let user_name = jwt_decode(response.data.user_token).user_name;
+                if (user_name.includes('A')) {
+                    router.push('/qualifications')
+                } else {
+                    router.push('/dashboard')
+                }
             } else {
                 setRequestMessage(response.message)
             }

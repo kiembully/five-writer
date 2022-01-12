@@ -18,12 +18,18 @@ import qualification from '../../public/dashboard-nav-icons/qualification.svg'
 import qualificationActive from '../../public/dashboard-nav-icons/qualification-active.svg'
 import writersRequest from '../../public/dashboard-nav-icons/writers-request.svg'
 import writersRequestActive from '../../public/dashboard-nav-icons/writers-request-active.svg'
+import invoice from '../../public/dashboard-nav-icons/invoice.svg'
+import invoiceActive from '../../public/dashboard-nav-icons/invoice-active.svg'
 import { useRouter } from 'next/dist/client/router';
 
-const DashboardNav = () => {
+const DashboardNav = (props) => {
     const router = useRouter();
 
-    return (
+    return props.isApplicant ? (
+        // navigation for applicants 
+        <>'asdasd'</>
+    ) : (
+        // navigation for writers 
         <div className={navStyles.dashboardNav}>
             <nav className={navStyles.nav}>
                 <ul>
@@ -31,6 +37,12 @@ const DashboardNav = () => {
                         <Link href='/dashboard'><a className={router.pathname == '/dashboard' ? navStyles.active : ''}><div className={navStyles.imageIconWrap}><Image src={router.pathname=='/dashboard'?allOrdersActive:allOrders} width={30} height={30} alt='allOrders icon' /></div><label>All Orders</label></a></Link>
                     </li>
                     <li>
+                        <Link href='/writers-request'><a className={router.pathname == '/writers-request' ? navStyles.active : ''}><div className={navStyles.imageIconWrap}><Image src={router.pathname=='/writers-request'?writersRequestActive:writersRequest} width={30} height={30} alt='allOrders icon' /></div><label>Writers Request</label></a></Link>
+                    </li>
+                    <li>
+                        <Link href='/my-invoices'><a className={router.pathname == '/my-invoices' ? navStyles.active : ''}><div className={navStyles.imageIconWrap}><Image src={router.pathname=='/my-invoices'?invoiceActive:invoice} width={30} height={30} alt='allOrders icon' /></div><label>My Invoices</label></a></Link>
+                    </li>
+                    {/* <li>
                         <Link href='/qualifications'><a className={router.pathname == '/qualifications' ? navStyles.active : ''}><div className={navStyles.imageIconWrap}><Image src={router.pathname=='/qualifications'?qualificationActive:qualification} width={30} height={30} alt='essayTest icon' /></div><label>Qualifications</label></a></Link>
                     </li>
                     <li>
@@ -44,7 +56,7 @@ const DashboardNav = () => {
                     </li>
                     <li>
                         <Link href='/writers-request'><a className={router.pathname == '/writers-request' ? navStyles.active : ''}><div className={navStyles.imageIconWrap}><Image src={router.pathname=='/writers-request'?writersRequestActive:writersRequest} width={30} height={30} alt='writersRequest icon' /></div><label>Writers Request</label></a></Link>
-                    </li>
+                    </li> */}
                 </ul>
             </nav>
         </div>

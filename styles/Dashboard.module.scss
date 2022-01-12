@@ -24,11 +24,17 @@
                 overflow: hidden;
                 transition: all 0.3s ease;
                 outline: none;
+                position: relative;
+                overflow: visible;
                 &.active {
                     color: $white-color;
                     background-color: $theme-color;
                     border: 0.5px solid $theme-color;
                     &:hover {
+                        color: $white-color;
+                    }
+                    .badgeNotif {
+                        background-color: #F6655A;
                         color: $white-color;
                     }
                 }
@@ -40,6 +46,20 @@
                 }
                 &:hover {
                     color: $theme-color;
+                }
+                .badgeNotif {
+                    border-radius: 20px;
+                    padding: 0 8px;
+                    font-size: 12px;
+                    background-color: #FBFDFF;
+                    color: #F6655A;
+                    position: absolute;
+                    top: -10px;
+                    right: -10px;
+                    min-width: 10px;
+                    border: 1px solid #F6655A;
+                    z-index: 1;
+                    pointer-events: none;
                 }
             }
         }
@@ -74,10 +94,14 @@
             .fcSelectFilter {
                 width: 100%;
                 outline: none;
-                border: 0;
-                font-size: 14px;
-                line-height: 18px;
-                color: $black-color;
+                border: none;
+                >div {
+                    >div:first-child {
+                        font-size: 14px;
+                        line-height: 18px;
+                        color: $text-color;
+                    }
+                }
             }
         }
     }

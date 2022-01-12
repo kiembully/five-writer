@@ -108,17 +108,11 @@ const Dashboard = (data) => {
     // search filters 
     const [filterValue, setFilterValue] = useState('available');
     const [textFilter, setTextFilter] = useState('');
-    const [selectFilter, setSelectFilter] = useState('available');
     const handleFilterValue = (event) => {
         setApiLoader(true);
         setFilterValue(event.target.value);
         setOrders(event.target.value)
     }
-    const handleSelectFilter = (event) => {
-      setApiLoader(true);
-      setSelectFilter(event.target.value);
-      setOrders(event.target.value)
-    };
     const handleTextFilter = (event) => {
       setTextFilter(event.target.value);
     }
@@ -177,7 +171,7 @@ const Dashboard = (data) => {
     }
     
     return (
-        <div className={dashboardStyles.dashboardWrap}>
+      <div className={dashboardStyles.dashboardWrap}>
             <div className={dashboardStyles.orderFilter}>
                 <span className={dashboardStyles.spnMobFilter}>
                   <FormControl fullWidth className={dashboardStyles.fcSelectFilter}>
@@ -185,9 +179,9 @@ const Dashboard = (data) => {
                     <Select
                       labelId="mob-select-filter-label"
                       id="mob-select-filter"
-                      value={selectFilter}
+                      value={filterValue}
                       label="Filter"
-                      onChange={handleSelectFilter}
+                      onChange={handleFilterValue}
                     >
                       <MenuItem value="available">Available Orders</MenuItem>
                       <MenuItem value="current">Current Orders</MenuItem>
@@ -199,12 +193,12 @@ const Dashboard = (data) => {
                   </FormControl>
                 </span>
                 <span className={dashboardStyles.spnWebFilter}>
-                    <button type="input" value="available" className={filterValue=="available"?dashboardStyles.active:''} onClick={handleFilterValue}>Available Orders</button>
-                    <button type="input" value="current" className={filterValue=="current"?dashboardStyles.active:''} onClick={handleFilterValue}>Current Orders</button>
-                    <button type="input" value="bid" className={filterValue=="bid"?dashboardStyles.active:''} onClick={handleFilterValue}>Order For Bid</button>
-                    <button type="input" value="revision" className={filterValue=="revision"?dashboardStyles.active:''} onClick={handleFilterValue}>Revision Orders</button>
-                    <button type="input" value="completed" className={filterValue=="completed"?dashboardStyles.active:''} onClick={handleFilterValue}>Completed Orders</button>
-                    <button type="input" value="cancelled" className={filterValue=="cancelled"?dashboardStyles.active:''} onClick={handleFilterValue}>Cancelled Orders</button>
+                    <button type="input" value="available" className={filterValue=="available"?dashboardStyles.active:''} onClick={handleFilterValue}>Available Orders <span className={dashboardStyles.badgeNotif}>01</span></button>
+                    <button type="input" value="current" className={filterValue=="current"?dashboardStyles.active:''} onClick={handleFilterValue}>Current Orders <span className={dashboardStyles.badgeNotif}>01</span></button>
+                    <button type="input" value="bid" className={filterValue=="bid"?dashboardStyles.active:''} onClick={handleFilterValue}>Order For Bid <span className={dashboardStyles.badgeNotif}>01</span></button>
+                    <button type="input" value="revision" className={filterValue=="revision"?dashboardStyles.active:''} onClick={handleFilterValue}>Revision Orders <span className={dashboardStyles.badgeNotif}>01</span></button>
+                    <button type="input" value="completed" className={filterValue=="completed"?dashboardStyles.active:''} onClick={handleFilterValue}>Completed Orders <span className={dashboardStyles.badgeNotif}>01</span></button>
+                    <button type="input" value="cancelled" className={filterValue=="cancelled"?dashboardStyles.active:''} onClick={handleFilterValue}>Cancelled Orders <span className={dashboardStyles.badgeNotif}>01</span></button>
                 </span>
                 <span className={dashboardStyles.spnFlexSplit}></span>
                 <span className={dashboardStyles.spnSearchWrap}>

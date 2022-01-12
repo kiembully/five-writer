@@ -9,7 +9,7 @@ import jwt_decode from "jwt-decode";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
-function MyApp({ Component, pageProps, data }) {
+function MyApp({ Component, pageProps }) {
   // toast config 
   const notify = () => toast.warn('Your session has expired!', {
     position: "top-center",
@@ -21,26 +21,39 @@ function MyApp({ Component, pageProps, data }) {
     progress: undefined,
   });
 
-  // AUTH GUARD
-  // prevent users from accessing prohibited page 
+  // AUTH GUARD STARTS
+  // prevent users from accessing prohibited page according to their level of accessibility
   const router = useRouter();
   useEffect(() => {
     if (!router.isReady) return;
     checkTokenExpiration();
-    const protectedPage = ['/dashboard'];
-    const userEntryPage = ['/login', '/register', '/forgot'];
-    const user_token = typeof window !== 'undefined' ? localStorage.getItem('user_token') : null;
-    if (!!user_token) {
-      if (userEntryPage.includes(router.pathname)) {
-          router.push('/404')
-      }
-    } else {
-        if (protectedPage.includes(router.pathname)) {
-            router.push('/404')
-        }
-    }
+    // const protectedPage = ['/dashboard', '/writers-request', '/my-invoices', '/qualifications', '/information-test', '/essay-test', '/my-specialization'];
+    // const userEntryPage = ['/login', '/register', '/forgot'];
+    // const applicantPage = ['/qualifications', '/information-test', '/essay-test', '/my-specialization'];
+    // const writersPage = ['/dashboard', '/writers-request', '/my-invoices'];
+    // const user_token = typeof window !== 'undefined' ? localStorage.getItem('user_token') : null;
+    // if (!!user_token) {
+    //   if (userEntryPage.includes(router.pathname)) {
+    //       router.push('/404')
+    //   } else {
+    //     let user_name = jwt_decode(user_token).user_name;
+    //     if (user_name.includes('A')) {
+    //       if (writersPage.includes(router.pathname)) {
+    //         router.push('/404');
+    //       }
+    //     } else {
+    //       if (applicantPage.includes(router.pathname)) {
+    //         router.push('/404');
+    //       }
+    //     }
+    //   }
+    // } else {
+    //     if (protectedPage.includes(router.pathname)) {
+    //         router.push('/404')
+    //     }
+    // }
   }, [])
-
+  // check validity of user's credentials 
   function checkTokenExpiration() {
     const user_token = typeof window !== 'undefined' ? localStorage.getItem('user_token') : null;
     if (!!user_token) {

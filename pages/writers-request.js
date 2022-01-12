@@ -1,7 +1,7 @@
 const writersRequest = () => {
     return (
         <div>
-            Enter
+            Writers Request
         </div>
     );
 }
